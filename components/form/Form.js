@@ -11,7 +11,7 @@ class Form extends Component {
     this.state = {
       url: '',
       cssSelectors: {},
-      interval: 5
+      interval: 300
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.onUpdateCSSSelectors = this.onUpdateCSSSelectors.bind(this)
