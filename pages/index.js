@@ -1,5 +1,11 @@
 import '../styles/index.scss'
 
-const Index = () => <div>Welcome to night-watch</div>
+import Form from '../components/form/Form'
+
+const Index = () => (
+  <div className='container main'>
+    <Form />
+  </div>
+)
 
 export default Index
