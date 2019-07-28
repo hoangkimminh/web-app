@@ -41,7 +41,7 @@ class CSSSelector extends Component {
       <div className='field'>
         <label className='label'>CSS Selector</label>
         <div className='control'>
-          <div className='columns'>
+          <div className='columns is-mobile'>
             <div className='column is-8'>
               <input
                 id='cssSelector0'

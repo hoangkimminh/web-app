@@ -30,7 +30,7 @@ class IntervalSetter extends Component {
     return (
       <div className='field'>
         <label className='label'>Interval</label>
-        <div className='columns'>
+        <div className='columns is-mobile'>
           <div className='control column is-6'>
             <div className='select is-fullwidth'>
               <select id='interval' name='interval' onChange={this.handleChange}>
