@@ -62,7 +62,7 @@ class CSSSelector extends Component {
             </div>
           </div>
           {Array(this.state.numOfAddedSelector).fill(
-            <div className='columns'>
+            <div className='columns is-mobile'>
               <div className='column is-8'>
                 <input
                   id='cssSelector0'
