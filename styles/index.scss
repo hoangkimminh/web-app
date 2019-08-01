@@ -1,51 +1,6 @@
+
+$box-shadow: 0 0;
+
 @import '../node_modules/bulma/bulma.sass';
 
-$light-grey: #d3d3d3;
-$silver: #c0c0c0;
-$dim-grey: #696969;
-$gray: #808080;
-$black: #000000;
-$white: #ffffff;
 
-//padding
-$padding-styles: (
-  p-1em: 1em,
-  p-2em: 2em,
-  p-3em: 3em
-);
-@each $key, $style in $padding-styles {
-  .#{$key} {
-    padding: $style;
-  }
-}
-
-//margin
-$margin-styles: (
-  m-1em: 1em,
-  m-2em: 2em,
-  m-3em: 3em
-);
-@each $key, $style in $margin-styles {
-  .#{$key} {
-    margin: $style;
-  }
-}
-
-.rounded-border {
-  border-radius: 20px;
-}
-
-/* Form */
-#form {
-  background-color: $light-grey;
-}
-
-#submit-button {
-  background-color: $black;
-  color: $white;
-}
-
-#add-css-button {
-  background-color: $dim-grey;
-  color: $white;
-}

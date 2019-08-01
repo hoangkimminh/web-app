@@ -3,27 +3,27 @@ import { Component } from 'react'
 class CSSSelector extends Component {
   constructor(props) {
     super(props)
-    this.state = { cssSelectors: {}, numOfAddedSelector: 0 }
+    this.state = { numOfAddedSelector: 0 }
     this.onAddCSSSelector = this.onAddCSSSelector.bind(this)
     this.onUpdateCSSSelectors = this.onUpdateCSSSelectors.bind(this)
+    this.onResetForm = this.onResetForm.bind(this)
   }
 
-  async updateState() {
+  async onUpdateCSSSelectors() {
     //get list of css input's value
-    const listCssInput = document.getElementsByName('cssSelector')
+    const listCssInput = await document.getElementsByName('cssSelector')
 
     //get list of type selection's value
-    const listCssType = document.getElementsByName('type')
-    let currentCSSSelectorState = this.state.cssSelectors
-    currentCSSSelectorState = {}
+    const listCssType = await document.getElementsByName('type')
+    let cssSelectors = {}
     await listCssInput.forEach((element, index) => {
       const cssSelector = element.value
       const type = listCssType[index].options[listCssType[index].selectedIndex].value
       if (cssSelector.trim() != '') {
-        currentCSSSelectorState[cssSelector] = type
+        cssSelectors[cssSelector] = type
       }
     })
-    this.setState({ cssSelectors: currentCSSSelectorState })
+    this.props.onUpdateCSSSelectors(cssSelectors)
   }
 
   onAddCSSSelector(event) {
@@ -31,9 +31,8 @@ class CSSSelector extends Component {
     this.setState({ numOfAddedSelector: this.state.numOfAddedSelector + 1 })
   }
 
-  async onUpdateCSSSelectors() {
-    await this.updateState()
-    this.props.onUpdateCSSSelectors(this.state.cssSelectors)
+  onResetForm() {
+    this.setState({numOfAddedSelector: 1})
   }
 
   render() {
@@ -82,9 +81,21 @@ class CSSSelector extends Component {
               </div>
             </div>
           )}
-          <button id='add-css-button' className='button is-fullwidth' onClick={this.onAddCSSSelector}>
+          <button
+            id='add-css-button'
+            className='button is-fullwidth'
+            onClick={this.onAddCSSSelector}
+          >
             Add more CSS Selector
           </button>
+          <style jsx>
+            {`
+              button {
+                background-color: hsl(0, 0%, 29%);
+                color: hsl(0, 0%, 100%);
+              }
+            `}
+          </style>
         </div>
       </div>
     )

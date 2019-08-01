@@ -8,22 +8,16 @@ const interval = {
 class IntervalSetter extends Component {
   constructor(props) {
     super(props)
-    this.state = { interval: 5, unit: 'minute' }
+    this.state = { unit: 'minute' }
     this.handleChange = this.handleChange.bind(this)
   }
 
-  async handleChange(event) {
-    const target = event.target
-    const name = target.name
-    const value = name === 'unit' ? target.value : parseInt(target.value)
-    console.log(target.value)
-    await this.setState({ [name]: value })
-    if (name === 'unit') {
-        await this.setState({interval: document.getElementById('interval').value})
-    }
-    this.props.onUpdateInterval(
-      this.state.unit === 'minute' ? this.state.interval * 60 : this.state.interval * 3600
-    )
+  async handleChange() {
+    const unitSelect = document.getElementById('unit')
+    const unit = unitSelect.options[unitSelect.selectedIndex].value
+    await this.setState({ unit: unit })
+    const interval = document.getElementById('interval').value
+    this.props.onUpdateInterval(unit === 'minute' ? interval * 60 : interval * 3600)
   }
 
   render() {
@@ -45,7 +39,7 @@ class IntervalSetter extends Component {
             </div>
           </div>
           <div className='control column is-6'>
-            <div className='select is-fullwidth' onChange={this.handleChange}>
+            <div className='select' onChange={this.handleChange}>
               <select name='unit' id='unit'>
                 <option>minute</option>
                 <option>hour</option>
