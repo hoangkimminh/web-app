@@ -17,10 +17,9 @@
 - `SCHEDULER_ADDRESS` (string): Address of scheduler
 - `CRAWLER_ADDRESS` (string): Address of crawler
 - `NOTIFICATION_SERVICE_ADDRESS` (string): Address of notification-service
-- `FACEBOOK_APP_ID` (string): ID of the app created on Facebook
-- `FACEBOOK_APP_SECRET` (string): Secret of the app created on Facebook
-- `FACEBOOK_CALLBACK_URL` (string): Callback URL after authenticated
-- `JWT_SECRET` (string): Secret to authenticate jwt
+- `FB_APP_ID` (string): Facebook app ID
+- `FB_APP_SECRET` (string): Facebook app secret
+- `JWT_SECRET` (string): JWT secret
 
 ### API Routes
 
