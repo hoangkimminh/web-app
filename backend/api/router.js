@@ -2,22 +2,45 @@ const { Router } = require('express')
 const passport = require('passport')
 const proxy = require('http-proxy-middleware')
 
-const { WATCH_MANAGER_ADDRESS, USER_MANAGER_ADDRESS } = process.env
+const {
+  USER_MANAGER_ADDRESS,
+  WATCH_MANAGER_ADDRESS,
+  SCHEDULER_ADDRESS,
+  CRAWLER_ADDRESS,
+  NOTIFICATION_SERVICE_ADDRESS
+} = process.env
+
 const router = Router()
 
-const proxyOptions = {
+const authProxy = proxy({
   target: 'http://www.example.org', // this option must be specified, but not used
   router: {
-    '/api/watch-manager': WATCH_MANAGER_ADDRESS,
-    '/api/user-manager': USER_MANAGER_ADDRESS
+    '/api/user-manager': USER_MANAGER_ADDRESS,
+    '/api/watch-manager': WATCH_MANAGER_ADDRESS
   },
   changeOrigin: true,
   pathRewrite: {
-    '/api/watch-manager': '/',
-    '/api/user-manager': '/'
+    '/api/user-manager': '/',
+    '/api/watch-manager': '/'
   }
-}
+})
 
-router.use('/', passport.authenticate('jwt', {session: false}), proxy(proxyOptions))
+const noAuthProxy = proxy({
+  target: 'http://www.example.org', // this option must be specified, but not used
+  router: {
+    '/api/scheduler': SCHEDULER_ADDRESS,
+    '/api/crawler': CRAWLER_ADDRESS,
+    '/api/notification-service': NOTIFICATION_SERVICE_ADDRESS
+  },
+  changeOrigin: true,
+  pathRewrite: {
+    '/api/scheduler': '/',
+    '/api/crawler': '/',
+    '/api/notification-service': '/'
+  }
+})
+
+router.use('/', passport.authenticate('jwt', { session: false }), authProxy)
+router.use('/', noAuthProxy)
 
 module.exports = router

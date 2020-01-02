@@ -5,6 +5,9 @@
   "author": "Night Watch Project",
   "license": "MIT",
   "repository": "github:night-watch-project/web-app",
+  "engines": {
+    "node": ">=12.0.0"
+  },
   "version": "0.0.1",
   "main": "pages/index.js",
   "scripts": {
@@ -14,16 +17,13 @@
     "start": "NODE_ENV=production node backend/server"
   },
   "dependencies": {
-    "@zeit/next-sass": "^1.0.1",
     "axios": "^0.19.0",
     "body-parser": "^1.19.0",
-    "bulma": "^0.7.5",
-    "dotenv-flow": "^3.1.0",
+    "bulma": "^0.8.0",
     "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
     "http-proxy-middleware": "^0.20.0",
+    "jsonwebtoken": "^8.5.1",
     "next": "^9.0.5",
-    "node-sass": "^4.12.0",
     "passport": "^0.4.0",
     "passport-facebook": "^3.0.0",
     "passport-jwt": "^4.0.0",
@@ -31,8 +31,10 @@
     "react-dom": "^16.9.0"
   },
   "devDependencies": {
+    "@zeit/next-sass": "^1.0.1",
     "eslint": "^6.3.0",
     "eslint-plugin-react": "^7.14.2",
-    "eslint-plugin-react-hooks": "^2.0.1"
+    "eslint-plugin-react-hooks": "^2.0.1",
+    "node-sass": "^4.12.0"
   }
 }
