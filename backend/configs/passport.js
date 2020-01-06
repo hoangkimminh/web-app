@@ -1,4 +1,4 @@
-const FacebookStrategy = require('passport-facebook').Strategy
+const { Strategy: FacebookStrategy } = require('passport-facebook')
 const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt')
 const jwt = require('jsonwebtoken')
 const axios = require('axios')
@@ -31,8 +31,8 @@ const facebookStrategy = new FacebookStrategy(
         user._id = res.data._id
       }
 
-      const token = jwt.sign({ id: user._id }, JWT_SECRET)
-      return done(null, user, token)
+      user.jwt = jwt.sign({ id: user._id }, JWT_SECRET) // attach JWT to user object
+      return done(null, user)
     } catch (err) {
       return done(err)
     }
