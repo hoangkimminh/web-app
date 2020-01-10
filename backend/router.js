@@ -4,13 +4,11 @@ const passport = require('passport')
 const router = Router()
 
 router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }))
+
 router.get(
   '/auth/facebook/cb',
-  passport.authenticate('facebook', {
-    failureRedirect: '/login',
-    successRedirect: '/dashboard',
-    session: false
-  })
+  passport.authenticate('facebook', { session: false }),
+  (req, res) => res.json(req.user)
 )
 
 module.exports = router

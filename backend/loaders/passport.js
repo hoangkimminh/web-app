@@ -4,11 +4,11 @@ const { facebookStrategy, jwtStrategy } = require('../configs/passport')
 passport.use(facebookStrategy)
 passport.use(jwtStrategy)
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser((user, done) => {
   done(null, user)
 })
 
-passport.deserializeUser(function(user, done) {
+passport.deserializeUser((user, done) => {
   done(null, user)
 })
 

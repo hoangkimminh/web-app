@@ -52,3 +52,7 @@
 #### 2. `/auth/facebook/cb`
 
 > Callback after authenticating with Facebook
+
+##### Response body
+
+User object attached with the JWT as an additional field. See [User schema](https://github.com/night-watch-project/user-manager/blob/master/src/models/user.js).

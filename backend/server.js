@@ -1,28 +1,23 @@
-const path = require('path')
 const express = require('express')
-const bodyParser = require('body-parser')
-const next = require('next')
 const apiRouter = require('./api/router')
 const rootRouter = require('./router')
+const expressLoader = require('./loaders/express')
+const nextLoader = require('./loaders/next')
+const passportLoader = require('./loaders/passport')
 
-const { NODE_ENV, PORT } = process.env
-
-const app = next({
-  dev: NODE_ENV !== 'production',
-  dir: path.join(__dirname, '..', 'frontend')
-})
-const handle = app.getRequestHandler()
+const { PORT } = process.env
 
 const main = async () => {
   try {
     const server = express()
-    await app.prepare()
 
-    server.use(bodyParser.json())
-    require('./loaders/passport')(server)
+    expressLoader(server)
+    const nextApp = await nextLoader()
+    passportLoader(server)
+
     server.use('/api', apiRouter)
     server.use('/', rootRouter)
-    server.get('*', (req, res) => handle(req, res))
+    server.get('*', nextApp.getRequestHandler())
 
     server.listen(PORT, (err) => {
       if (err) throw err
