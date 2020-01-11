@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 
 import DashboardLayout from '../components/dashboard-layout'
 
@@ -29,12 +30,14 @@ const Dashboard = () => {
               paddingRight: '1em'
             }}
           >
-            <a className='button is-primay'>
-              <span className='icon'>
-                <ion-icon name='add-circle-outline'></ion-icon>
-              </span>{' '}
-              <span>Add new watch</span>
-            </a>
+            <Link href='/new-watch'>
+              <a className='button is-primay'>
+                <span className='icon'>
+                  <ion-icon name='add-circle-outline'></ion-icon>
+                </span>{' '}
+                <span>Add new watch</span>
+              </a>
+            </Link>
           </div>
         </div>
       </div>
