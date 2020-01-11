@@ -52,6 +52,7 @@
 #### 2. `/auth/facebook/cb`
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 > Callback after authenticating with Facebook
 
 ##### Response body
@@ -60,3 +61,6 @@ User object attached with the JWT as an additional field. See [User schema](http
 =======
 > Callback after authenticating with Facebook. Redirect to `/dashboard` on success, to `/login` on failure.
 >>>>>>> 8933b858c15cca378f33529e1c22186b47616ffb
+=======
+> Callback after authenticating with Facebook. Redirect to `/dashboard` on success, to `/login` on failure.
+>>>>>>> 5c9175433594d325b0479c9271bc212f60dbbf27

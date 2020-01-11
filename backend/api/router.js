@@ -28,4 +28,4 @@ proxy('/scheduler', SCHEDULER_ADDRESS)
 proxy('/crawler', CRAWLER_ADDRESS)
 proxy('/notification-service', NOTIFICATION_SERVICE_ADDRESS)
 
-module.exports = router
+module.exports = () => router

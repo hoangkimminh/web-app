@@ -19,8 +19,8 @@ const main = async () => {
     expressLoader(server)
     passportLoader(server)
 
-    const nextApp = await nextLoader()
-    server.get('*', nextApp.getRequestHandler())
+    server.use('/api', apiRouter())
+    server.use('/', rootRouter(nextApp))
 
     server.listen(PORT, (err) => {
       if (err) throw err
