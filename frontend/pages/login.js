@@ -1,20 +1,19 @@
-import Link from 'next/link'
-
 const Login = () => (
-  <div className='is-flex'>
-    <Link href='/auth/facebook'>
-      <button className='button is-dark is-medium'>
-        <ion-icon name='logo-facebook' size='large' />
-        &nbsp;Login via Facebook
-      </button>
-    </Link>
+  <div className='box is-flex'>
+    <h3 className='title is-3'>WELCOME TO NIGHTWATCH!</h3>
+    <a
+      className='button is-medium'
+      href='/auth/facebook'
+      style={{ backgroundColor: '#4267B2', color: '#ffffff', display: 'inline' }}
+    >
+      <span className='icon'>
+        <ion-icon name='logo-facebook'></ion-icon>
+      </span>
+      <span>Login with Facebook</span>
+    </a>
     <style jsx>{`
-      div {
-        width: 100vw;
-        height: 100vh;
-        align-items: center;
-        justify-content: center;
-      }
+      align-items: center;
+      flex-direction: column;
     `}</style>
   </div>
 )
