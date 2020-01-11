@@ -1,6 +1,5 @@
 const { Strategy: FacebookStrategy } = require('passport-facebook')
-const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt')
-const jwt = require('jsonwebtoken')
+const { Strategy: JwtStrategy } = require('passport-jwt')
 const axios = require('axios')
 
 const { FB_APP_ID, FB_APP_SECRET, JWT_SECRET, USER_MANAGER_ADDRESS } = process.env
@@ -27,11 +26,10 @@ const facebookStrategy = new FacebookStrategy(
           linkedAccounts: { facebook: id }
         }
         res = await axios.post(USER_MANAGER_ADDRESS, user)
-        if (res.status !== 200) throw new Error('Cannot create new user')
+        if (res.status !== 200) throw new Error('Cannot create a new user')
         user._id = res.data._id
       }
 
-      user.jwt = jwt.sign({ id: user._id }, JWT_SECRET) // attach JWT to user object
       return done(null, user)
     } catch (err) {
       return done(err)
@@ -41,12 +39,12 @@ const facebookStrategy = new FacebookStrategy(
 
 const jwtStrategy = new JwtStrategy(
   {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    jwtFromRequest: (req) => req.cookies['jwt'],
     secretOrKey: JWT_SECRET
   },
   async (jwtPayload, done) => {
     try {
-      const res = await axios.get(`${USER_MANAGER_ADDRESS}/${jwtPayload.id}`)
+      const res = await axios.get(`${USER_MANAGER_ADDRESS}/${jwtPayload._id}`)
       const user = res.data
       return done(null, user)
     } catch (err) {
