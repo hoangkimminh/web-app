@@ -11,16 +11,16 @@ const Dashboard = () => {
       const res = await fetch('/api/scheduler/watches')
       const data = await res.json()
       await setWatches(data)
+      console.log(data)
     }
     fetchWatches()
-    console.log(watches)
   }, [])
 
   return (
     <DashboardLayout>
-      <div className='section'>
+      <div className='section' style={{ paddingTop: '1em', paddingBottom: '0em' }}>
         <div className='card' style={{ display: 'flex' }}>
-          <p className='card-header-title is-size-3'>MY WATCHES</p>
+          <p className='card-header-title is-size-4'>MY WATCHES</p>
           <div
             className='add-button'
             style={{
@@ -42,126 +42,85 @@ const Dashboard = () => {
         </div>
       </div>
       <div className='section'>
-        <div className='card'>
-          <div className='card-header'>
-            <p className='card-header-title'>
-              URL:{' '}
-              <a
-                href='https://shopee.vn/Th%C3%B9ng-bia-Tiger-24-lon-330ml-lon-i.98128945.1608411039'
-                target='_blank'
-              >
-                https://shopee.vn/Th%C3%B9ng-bia-Tiger-24-lon-330ml-lon-i.98128945.1608411039
-              </a>
-            </p>
-          </div>
-          <div className='card-content'>
-            <div className='content'>
-              <div className='card-field'>
-                <span className='has-text-weight-bold'>Interval: </span>
-                <span>9000{' seconds'}</span>
-              </div>
-              <div className='card-field'>
-                <span className='has-text-weight-bold'>Create at: </span>
-                <span>20:18 10/01/2020</span>
-              </div>
-              <div className='card-field'>
-                <span className='has-text-weight-bold'>List products: </span>
-              </div>
-              {/* <div className='card-field columns'>
-                        <div className="column is-8">
-                            Iphone 11 Pro Max
-                        </div>
-                        <div className="column is-4">
-                            28000000
-                        </div>
-                    </div> */}
-              <div className='card-field'>
-                <table className='table is-hoverable'>
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Value</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Iphone 11 Pro Max</td>
-                      <td>28000000</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div className='buttons'>
-              <button className='button is-primary'>Edit</button>
-              <button className='button is-danger'>Delete</button>
-            </div>
-          </div>
-          <footer></footer>
-        </div>
-        <br />
-        <div className='card'>
-          <div className='card-header'>
-            <p className='card-header-title'>
-              URL:{' '}
-              <a
-                href='https://shopee.vn/Th%C3%B9ng-bia-Tiger-24-lon-330ml-lon-i.98128945.1608411039'
-                target='_blank'
-              >
-                https://shopee.vn/Th%C3%B9ng-bia-Tiger-24-lon-330ml-lon-i.98128945.1608411039
-              </a>
-            </p>
-          </div>
-          <div className='card-content'>
-            <div className='content'>
-              <div className='card-field'>
-                <span className='has-text-weight-bold'>Interval: </span>
-                <span>9000{' seconds'}</span>
-              </div>
-              <div className='card-field'>
-                <span className='has-text-weight-bold'>Create at: </span>
-                <span>20:18 10/01/2020</span>
-              </div>
-              <div className='card-field'>
-                <span className='has-text-weight-bold'>List products: </span>
-              </div>
-              {/* <div className='card-field columns'>
-                        <div className="column is-8">
-                            Iphone 11 Pro Max
-                        </div>
-                        <div className="column is-4">
-                            28000000
-                        </div>
-                    </div> */}
-              <div className='card-field'>
-                <table className='table is-hoverable'>
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Value</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Iphone 11 Pro Max</td>
-                      <td>28000000</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div className='buttons'>
-              <button className='button is-primary'>Edit</button>
-              <button className='button is-danger'>Delete</button>
-            </div>
-          </div>
-          <footer></footer>
-        </div>
+        <WatchCard id='5e16e468a95f9d4307618633'></WatchCard>
         <br />
       </div>
     </DashboardLayout>
+  )
+}
+
+const WatchCard = (props) => {
+  useEffect(async () => {
+    async function fetchWatchInfo(id) {
+      const res = await fetch('/api/watch-manager/get/' + id)
+      const data = await res.json()
+      console.log(data)
+    }
+    await fetchWatchInfo(props.id)
+  }, [props.id])
+  return (
+    <div className='card'>
+      <div className='card-header'>
+        <p className='card-header-title'>
+          <span>URL: </span>
+          <span>
+            <a
+              href='https://shopee.vn/Th%C3%B9ng-bia-Tiger-24-lon-330ml-lon-i.98128945.1608411039'
+              target='_blank'
+            >
+              https://shopee.vn/Th%C3%B9ng-bia-Tiger-24-lon-330ml-lon-i.98128945.1608411039
+            </a>
+          </span>
+        </p>
+      </div>
+      <div className='card-content'>
+        <div className='content'>
+          <div className='card-field'>
+            <span className='has-text-weight-bold'>Interval: </span>
+            <span>9000{' seconds'}</span>
+          </div>
+          <div className='card-field'>
+            <span className='has-text-weight-bold'>Create at: </span>
+            <span>20:18 10/01/2020</span>
+          </div>
+          <div className='card-field'>
+            <span className='has-text-weight-bold'>List products: </span>
+          </div>
+          <div className='card-field'>
+            <table className='table is-hoverable'>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Iphone 11 Pro Max</td>
+                  <td>28000000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className='buttons'>
+          <button className='button is-primary'>
+            <span className='icon'>
+              <ion-icon name='create'></ion-icon>
+            </span>
+            <span>Edit</span>
+          </button>
+          <button className='button is-danger'>
+            <span className='icon'>
+              <ion-icon name='trash'></ion-icon>
+            </span>
+            <span>Delete</span>
+          </button>
+        </div>
+      </div>
+      <footer></footer>
+    </div>
   )
 }
 

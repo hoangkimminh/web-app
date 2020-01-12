@@ -37,9 +37,9 @@ const DashboardLayout = (props) => {
             <li>
               <a href='#' className=''>
                 <span className='icon'>
-                  <ion-icon name='logo-facebook'></ion-icon>
+                  <ion-icon name='analytics'></ion-icon>
                 </span>{' '}
-                About
+                Analytics
               </a>
             </li>
           </ul>
