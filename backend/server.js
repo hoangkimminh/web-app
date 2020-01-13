@@ -11,12 +11,8 @@ const main = async () => {
   try {
     const server = express()
 
-    server.use('/api', apiRouter)
-    server.use('/', rootRouter)
-
-    // apiRouter must be above expressLoader
-    // aka proxies must be handled before body-parser
     expressLoader(server)
+    const nextApp = await nextLoader()
     passportLoader(server)
 
     server.use('/api', apiRouter())
