@@ -23,32 +23,30 @@
 
 ### API Routes
 
-#### 1. `/api/user-manager`
-
-> Proxy to [user-manager](https://github.com/night-watch-project/user-manager#routes)
-
-#### 2. `/api/watch-manager`
-
-> Proxy to [watch-manager](https://github.com/night-watch-project/watch-manager#routes)
-
-#### 3. `/api/scheduler`
-
-> Proxy to [scheduler](https://github.com/night-watch-project/scheduler#routes)
-
-#### 4. `/api/crawler`
-
-> Proxy to [crawler](https://github.com/night-watch-project/crawler#routes)
-
-#### 5. `/api/notification-service`
-
-> Proxy to [notification-service](https://github.com/night-watch-project/notification-service#routes)
-
-### Root Routes
-
-#### 1. `/auth/facebook`
+#### 1. `/api/auth-service/facebook`
 
 > Authenticate with Facebook
 
-#### 2. `/auth/facebook/cb`
+#### 2. `/api/auth-service/facebook/cb`
 
 > Callback after authenticating with Facebook. Redirect to `/dashboard` on success, to `/login` on failure.
+
+#### 3. `/api/user-manager`
+
+> Proxy to [user-manager](https://github.com/night-watch-project/user-manager#routes)
+
+#### 4. `/api/watch-manager`
+
+> Proxy to [watch-manager](https://github.com/night-watch-project/watch-manager#routes)
+
+#### 5. `/api/scheduler`
+
+> Proxy to [scheduler](https://github.com/night-watch-project/scheduler#routes)
+
+#### 6. `/api/crawler`
+
+> Proxy to [crawler](https://github.com/night-watch-project/crawler#routes)
+
+#### 7. `/api/notification-service`
+
+> Proxy to [notification-service](https://github.com/night-watch-project/notification-service#routes)

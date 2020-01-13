@@ -8,7 +8,7 @@ const facebookStrategy = new FacebookStrategy(
   {
     clientID: FB_APP_ID,
     clientSecret: FB_APP_SECRET,
-    callbackURL: '/auth/facebook/cb',
+    callbackURL: '/api/auth-service/facebook/cb',
     profileFields: ['id', 'displayName', 'picture.type(large)', 'emails']
   },
   async (accessToken, refreshToken, profile, done) => {

@@ -1,19 +1,13 @@
 import Link from 'next/link'
 
 const LinkedButton = (props) => {
-  const { href = '#', fullWidth, icon, text, disabled } = props
+  const { className, href = '#', icon, text, disabled } = props
   return (
     <Link href={href}>
-      <button
-        className={`button is-dark ${fullWidth ? 'is-fullwidth' : ''}`}
-        disabled={disabled}
-      >
+      <button className={className} disabled={disabled}>
         {icon}
         {icon && text && <span>&nbsp;</span>}
         {text}
-        <style jsx>{`
-          text-transform: capitalize;
-        `}</style>
       </button>
     </Link>
   )
