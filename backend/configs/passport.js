@@ -44,7 +44,7 @@ const jwtStrategy = new JwtStrategy(
   },
   async (jwtPayload, done) => {
     try {
-      const res = await axios.get(`${USER_MANAGER_ADDRESS}/${jwtPayload._id}`)
+      const res = await axios.get(`${USER_MANAGER_ADDRESS}/${jwtPayload.userID}`)
       const user = res.data
       return done(null, user)
     } catch (err) {
