@@ -45,10 +45,10 @@ const Dashboard = () => {
           display: flex;
         }
         .add-button {
-          display: flex,
-          flex-direction: column,
-          justify-content: center,
-          padding-right: 1em
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding-right: 1em;
         }
       `}</style>
       </div>

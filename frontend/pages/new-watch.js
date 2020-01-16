@@ -1,16 +1,17 @@
 import WatchRegisteringForm from '../components/watch-registering/form'
 
-import DashboardLayout from '../components/dashboard-layout'
+import Sidebar from '../components/sidebar'
+import Layout from '../components/layout'
 
 const AddWatch = () => (
-  <DashboardLayout>
+  <Layout left={<Sidebar />}>
     <div className='section is-flex'>
       <WatchRegisteringBox />
       <style jsx>{`
         justify-content: center;
       `}</style>
     </div>
-  </DashboardLayout>
+  </Layout>
 )
 
 const WatchRegisteringBox = () => (
