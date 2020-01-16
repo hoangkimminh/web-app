@@ -1,16 +1,8 @@
 const Sidebar = (props) => {
   return (
-    <aside
-      className='is-narrow-mobile section is-hidden-mobile'
-      style={{ backgroundColor: '#f0f3f5', height: '100%'}}
-    >
+    <aside className='is-narrow-mobile section is-hidden-mobile'>
       <div
         className='avatar'
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          justifyItems: 'center'
-        }}
       >
         <figure class='image is-128x128'>
           <img
@@ -21,13 +13,8 @@ const Sidebar = (props) => {
       </div>
       <div
         className='avatar'
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          justifyItems: 'center'
-        }}
       >
-        <span className='is-size-5'>Kokomi</span>
+        <span className='is-size-5 display-name'>Kokomi</span>
       </div>
 
       <p className='menu-label is-hidden-touch'>MANAGE WATCHES</p>
@@ -68,6 +55,21 @@ const Sidebar = (props) => {
           </a>
         </li>
       </ul>
+      <style jsx>{`
+        aside {
+          background-color: #f0f3f5;
+          height: 100%;
+        }
+        .avatar {
+          display: flex;
+          justify-content: center;
+          justify-items: center;
+          margin-bottom: 1em;
+        }
+        .display-name {
+          margin-bottom: 1em;
+        }
+      `}</style>
     </aside>
   )
 }

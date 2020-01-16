@@ -4,6 +4,8 @@ import Link from 'next/link'
 import Layout from '../components/layout'
 import Sidebar from '../components/sidebar'
 
+import {secondsToHumanTime} from '../utils/index'
+
 const Dashboard = () => {
   const [watches, setWatches] = useState([])
 
@@ -24,7 +26,7 @@ const Dashboard = () => {
           <p className='card-header-title is-size-4'>MY WATCHES</p>
           <div className='add-button'>
             <Link href='/new-watch'>
-              <a className='button is-primay'>
+              <a className='button is-primary'>
                 <span className='icon'>
                   <ion-icon name='add-circle-outline'></ion-icon>
                 </span>{' '}
@@ -44,9 +46,9 @@ const Dashboard = () => {
         }
         .add-button {
           display: flex,
-          flexDirection: column,
-          justifyContent: center,
-          paddingRight: 1em
+          flex-direction: column,
+          justify-content: center,
+          padding-right: 1em
         }
       `}</style>
       </div>
@@ -65,25 +67,22 @@ const WatchCard = (props) => {
   }, [props.id])
   return (
     <div className='box'>
-      <div className='card-header'>
-        <p className='card-header-title'>
-          <span>URL: </span>
-          <span>
-            <a
-              href='https://shopee.vn/Th%C3%B9ng-bia-Tiger-24-lon-330ml-lon-i.98128945.1608411039'
-              target='_blank'
-            >
-              <h6>
-                https://shopee.vn/Th%C3%B9ng-bia-Tiger-24-lon-330ml-lon-i.98128945.1608411039
-              </h6>
-            </a>
-          </span>
-        </p>
-      </div>
       <div className='card-content'>
         <div className='content'>
           <div className='card-field'>
-            <span className='has-text-weight-bold'>Active:</span>
+            <span className='has-text-weight-bold'>URL: </span>
+            <span>
+              <a
+                href='https://shopee.vn/Th%C3%B9ng-bia-Tiger-24-lon-330ml-lon-i.98128945.1608411039'
+                target='_blank'
+              >
+                https://shopee.vn/Th%C3%B9ng-bia-Tiger-24-lon-330ml-lon-i.98128945.1608411039
+              </a>
+            </span>
+            <hr />
+          </div>
+          <div className='card-field'>
+            <span className='has-text-weight-bold'>Active:&nbsp;</span>
             <input
               id='switchRoundedDefault'
               type='checkbox'
@@ -94,15 +93,10 @@ const WatchCard = (props) => {
           </div>
           <div className='card-field'>
             <span className='has-text-weight-bold'>Interval: </span>
-            <span>9000{' seconds'}</span>
+            <span>{secondsToHumanTime(9000)}</span>
           </div>
           <div className='card-field'>
-            <span className='has-text-weight-bold'>Create at: </span>
-            <span>20:18 10/01/2020</span>
-          </div>
-
-          <div className='card-field'>
-            <span className='has-text-weight-bold'>List products: </span>
+            <span className='has-text-weight-bold'>Targets: </span>
           </div>
           <div className='card-field'>
             <table className='table is-hoverable'>
@@ -123,7 +117,6 @@ const WatchCard = (props) => {
             </table>
           </div>
         </div>
-
         <div class='card-field'>
           <div className='buttons'>
             <button className='button is-primary'>
