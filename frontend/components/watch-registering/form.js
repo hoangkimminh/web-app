@@ -1,6 +1,7 @@
 import { useCallback, useReducer, useState } from 'react'
 import axios from 'axios'
 import { secondsToHumanTime } from '../../utils'
+import currentUser from '../../helpers/current_user'
 
 const Form = () => {
   const [url, changeUrl] = useState('')
@@ -12,15 +13,16 @@ const Form = () => {
       else state[i] = newValue
       return [...state]
     },
-    [{ selector: '', type: 'string', name: '' }]
+    [{ cssSelector: '', type: 'string', name: '' }]
   )
   const submit = useCallback(() => {
-    const cssSelectorsObj = cssSelectors.reduce((result, cssSelector) => {
-      const { selector, type } = cssSelector
-      result[selector] = type
-      return result
-    }, {})
-    axios.post('/api/watch-manager', { url, interval, cssSelectors: cssSelectorsObj })
+    const targets = cssSelectors
+    axios.post('/api/watch-manager', {
+      userID: currentUser.id,
+      url,
+      interval,
+      targets
+    })
   }, [url, interval, cssSelectors])
 
   return (
@@ -93,7 +95,7 @@ const CssSelectorsField = (props) => (
       <button
         className='button is-fullwidth is-dark'
         onClick={() =>
-          props.onChange([props.value.length, { selector: '', type: 'string', name: '' }])
+          props.onChange([props.value.length, { cssSelector: '', type: 'string', name: '' }])
         }
       >
         <ion-icon name='add' />
@@ -103,7 +105,7 @@ const CssSelectorsField = (props) => (
 )
 
 const CssSelectorRow = (props) => {
-  const { selector, type, name } = props.value
+  const { cssSelector: cssSelector, type, name } = props.value
 
   return (
     <div className='field is-grouped'>
@@ -113,7 +115,7 @@ const CssSelectorRow = (props) => {
           type='text'
           placeholder='Unique name'
           value={name}
-          onChange={(ev) => props.onChange({ selector, type, name: ev.target.value })}
+          onChange={(ev) => props.onChange({ cssSelector: cssSelector, type, name: ev.target.value })}
           required
         />
       </div>
@@ -122,8 +124,8 @@ const CssSelectorRow = (props) => {
           className='input'
           type='text'
           placeholder='#id.a-class'
-          value={selector}
-          onChange={(ev) => props.onChange({ selector: ev.target.value, type, name })}
+          value={cssSelector}
+          onChange={(ev) => props.onChange({ cssSelector: ev.target.value, type, name })}
           required
         />
       </div>
@@ -131,7 +133,7 @@ const CssSelectorRow = (props) => {
         <div className='select'>
           <select
             value={type}
-            onChange={(ev) => props.onChange({ selector, type: ev.target.value, name })}
+            onChange={(ev) => props.onChange({ cssSelector: cssSelector, type: ev.target.value, name })}
           >
             <option>STRING</option>
           </select>
