@@ -1,18 +1,18 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-import currentUser from '../helpers/current_user'
+import { getCurrentUser } from '../utils/index'
 import Layout from '../components/layout'
 import Sidebar from '../components/sidebar'
 import WatchCard from '../components/watch-card'
 import { LinkedButton } from '../components/buttons'
 
-const Dashboard = (props) => {
+const Dashboard = () => {
   const [watchList, setWatchList] = useState([])
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get('api/watch-manager/users/' + currentUser.id)
+      const res = await axios.get('api/watch-manager/users/' + getCurrentUser().id)
       const data = res.data
       setWatchList(data)
     }
@@ -22,7 +22,16 @@ const Dashboard = (props) => {
   const watchListCard =
     Array.isArray(watchList) &&
     watchList.map((watch, i) => {
-      return <WatchCard key={i} _id={watch._id} url={watch.url} interval={watch.interval} active={watch.active} targets={watch.targets}/>
+      return (
+        <WatchCard
+          key={i}
+          _id={watch._id}
+          url={watch.url}
+          interval={watch.interval}
+          active={watch.active}
+          targets={watch.targets}
+        />
+      )
     })
 
   return (

@@ -1,7 +1,7 @@
 import { useCallback, useReducer, useState } from 'react'
 import axios from 'axios'
 import { secondsToHumanTime } from '../../utils'
-import currentUser from '../../helpers/current_user'
+import {getCurrentUser} from '../../utils/index'
 
 const Form = () => {
   const [url, changeUrl] = useState('')
@@ -18,7 +18,7 @@ const Form = () => {
   const submit = useCallback(() => {
     const targets = cssSelectors
     axios.post('/api/watch-manager', {
-      userID: currentUser.id,
+      userID: getCurrentUser().id,
       url,
       interval,
       targets
