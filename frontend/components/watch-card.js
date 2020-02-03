@@ -8,9 +8,11 @@ const WatchCard = (props) => {
 
   const onChangeStatus = async () => {
     try {
-      await setActive(!active)
-      const res = await axios.put('/api/watch-manager/' + props._id + '/status/' + active)
-      console.log(res.data)
+      const toggleActive = active ? 'inactive' : 'active'
+      const res = await axios.put('/api/watch-manager/' + props._id + '/status/' + toggleActive)
+      if (res.status === 204) {
+        await setActive(!active)
+      }
     } catch (error) {
       console.log(error)
     }
