@@ -1,7 +1,7 @@
 import { useCallback, useReducer, useState } from 'react'
 import axios from 'axios'
 import { secondsToHumanTime } from '../../utils'
-import {getCurrentUser} from '../../utils/index'
+import { getCurrentUser } from '../../utils/index'
 
 const Form = () => {
   const [url, changeUrl] = useState('')
@@ -95,7 +95,10 @@ const CssSelectorsField = (props) => (
       <button
         className='button is-fullwidth is-dark'
         onClick={() =>
-          props.onChange([props.value.length, { cssSelector: '', type: 'string', name: '' }])
+          props.onChange([
+            props.value.length,
+            { cssSelector: '', type: 'string', name: '' }
+          ])
         }
       >
         <ion-icon name='add' />
@@ -115,7 +118,9 @@ const CssSelectorRow = (props) => {
           type='text'
           placeholder='Unique name'
           value={name}
-          onChange={(ev) => props.onChange({ cssSelector: cssSelector, type, name: ev.target.value })}
+          onChange={(ev) =>
+            props.onChange({ cssSelector: cssSelector, type, name: ev.target.value })
+          }
           required
         />
       </div>
@@ -133,7 +138,9 @@ const CssSelectorRow = (props) => {
         <div className='select'>
           <select
             value={type}
-            onChange={(ev) => props.onChange({ cssSelector: cssSelector, type: ev.target.value, name })}
+            onChange={(ev) =>
+              props.onChange({ cssSelector: cssSelector, type: ev.target.value, name })
+            }
           >
             <option>STRING</option>
           </select>
