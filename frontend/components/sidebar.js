@@ -1,9 +1,8 @@
-import { connect } from 'react-redux'
 import { useEffect, useContext } from 'react'
 import { observer } from 'mobx-react-lite'
 import { userStoreContext } from '../stores/user'
 
-const Sidebar = observer((props) => {
+const Sidebar = observer(() => {
   const userStore = useContext(userStoreContext)
 
   useEffect(() => {
@@ -94,4 +93,4 @@ const mapStateToProps = (state) => ({
   id: state.id
 })
 
-export default connect(mapStateToProps, null)(Sidebar)
+export default Sidebar

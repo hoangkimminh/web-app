@@ -1,3 +1,5 @@
+import '../styles/index.scss'
+
 const Layout = (props) => {
   const { left, children, right } = props
   return (
