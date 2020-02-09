@@ -1,9 +1,10 @@
-import { Cookies } from 'react-cookie'
-const cookies = new Cookies()
-
 const SECONDS_PER_MINUTE = 60
 const SECONDS_PER_HOUR = 60 * SECONDS_PER_MINUTE
 const SECONDS_PER_DAY = 24 * SECONDS_PER_HOUR
+
+import { Cookies } from 'react-cookie'
+
+const cookies = new Cookies()
 
 const secondsToHumanTime = (s) => {
   let d, h, m

@@ -1,16 +1,24 @@
-const Sidebar = () => {
+import { connect } from 'react-redux'
+import { useEffect, useContext } from 'react'
+import { observer } from 'mobx-react-lite'
+import { userStoreContext } from '../stores/user'
+
+const Sidebar = observer((props) => {
+  const userStore = useContext(userStoreContext)
+
+  useEffect(() => {
+    userStore.fetchUser()
+  })
+
   return (
     <section className='section has-background-white-bis'>
       <div className='avatar is-flex'>
         <figure className='image is-128x128'>
-          <img
-            className='is-rounded'
-            src='https://bulma.io/images/placeholders/128x128.png'
-          />
+          <img className='is-rounded' src={userStore.avatar} />
         </figure>
       </div>
       <h6 className='title is-6 has-text-centered'>
-        Kokomi&nbsp;&nbsp;&nbsp;
+        {userStore.name}&nbsp;&nbsp;&nbsp;
         <span className='tag is-rounded is-dark'>normal</span>
       </h6>
 
@@ -79,6 +87,11 @@ const Sidebar = () => {
       `}</style>
     </section>
   )
-}
+})
 
-export default Sidebar
+const mapStateToProps = (state) => ({
+  userName: state.userName,
+  id: state.id
+})
+
+export default connect(mapStateToProps, null)(Sidebar)
