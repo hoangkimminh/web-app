@@ -8,7 +8,7 @@ const LoginForm = () => (
         <span className='icon is-left'>
           <ion-icon name='person' />
         </span>
-        <input className='input' type='text' placeholder='Username or email' disabled />
+        <input className='input' type='text' placeholder='Username or email' />
       </div>
     </div>
     <div className='field'>
@@ -16,14 +16,12 @@ const LoginForm = () => (
         <span className='icon is-left'>
           <ion-icon name='key' />
         </span>
-        <input className='input' type='password' placeholder='Password' disabled />
+        <input className='input' type='password' placeholder='Password' />
       </div>
     </div>
     <div className='field'>
       <div className='control'>
-        <button className='button is-fullwidth is-outlined is-success' disabled>
-          Log in
-        </button>
+        <button className='button is-fullwidth is-success'>Log in</button>
       </div>
     </div>
   </form>
@@ -48,11 +46,11 @@ const LoginButton = (props) => {
 const Login = () => (
   <Layout>
     <section className='is-flex'>
-      <div className='box is-flex has-background-white-bis'>
-        <h4 className='title is-4 has-text-centered is-marginless'>Log In</h4>
-        <hr />
-        <LoginForm />
-        <hr />
+      <div className='box is-flex has-background-light'>
+        <h4 className='title is-4 has-text-centered'>Log In</h4>
+        <div>
+          <LoginForm />
+        </div>
         <h6 className='subtitle is-6'>Or log in with:</h6>
         <div className='buttons'>
           <LoginButton service='facebook' style={{ backgroundColor: '#3b5998' }} />
@@ -69,6 +67,13 @@ const Login = () => (
         .box {
           flex-direction: column;
           justify-content: center;
+        }
+        .box > h4,
+        div {
+          margin-bottom: 2rem;
+        }
+        .box > h6 {
+          margin-bottom: 1rem;
         }
       `}</style>
     </section>

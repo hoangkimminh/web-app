@@ -10,7 +10,7 @@ const Sidebar = observer(() => {
   })
 
   return (
-    <section className='section has-background-white-bis'>
+    <section className='section has-background-light'>
       <div className='avatar is-flex'>
         <figure className='image is-128x128'>
           <img className='is-rounded' src={userStore.avatar} />
@@ -21,14 +21,17 @@ const Sidebar = observer(() => {
         <span className='tag is-rounded is-dark'>normal</span>
       </h6>
 
-      <p className='menu-label'>MY WATCHES</p>
+      <p className='menu-label'>NOTIFICATIONS</p>
+      <ul className='menu-list'></ul>
+
+      <p className='menu-label'>WATCHES</p>
       <ul className='menu-list'>
         <li>
           <a href='#'>
             <span className='icon'>
               <ion-icon name='eye' />
             </span>
-            <span>&nbsp;Watch List</span>
+            <span>&nbsp;Manage watches</span>
           </a>
         </li>
         <li>
@@ -41,7 +44,7 @@ const Sidebar = observer(() => {
         </li>
       </ul>
 
-      <p className='menu-label'>MY ACCOUNT</p>
+      <p className='menu-label'>ACCOUNT</p>
       <ul className='menu-list'>
         <li>
           <a href='#'>
