@@ -91,9 +91,4 @@ const Sidebar = observer(() => {
   )
 })
 
-const mapStateToProps = (state) => ({
-  userName: state.userName,
-  id: state.id
-})
-
 export default Sidebar

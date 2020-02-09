@@ -108,7 +108,7 @@ const CssSelectorsField = (props) => (
 )
 
 const CssSelectorRow = (props) => {
-  const { cssSelector: cssSelector, type, name } = props.value
+  const { cssSelector, type, name } = props.value
 
   return (
     <div className='field is-grouped'>

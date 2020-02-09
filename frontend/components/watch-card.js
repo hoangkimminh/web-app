@@ -16,7 +16,7 @@ const WatchCard = (props) => {
         await setActive(!active)
       }
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 
