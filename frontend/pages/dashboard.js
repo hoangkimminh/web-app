@@ -5,6 +5,7 @@ import { getCurrentUser } from '../utils/index'
 import Layout from '../components/layout'
 import Sidebar from '../components/sidebar'
 import WatchCard from '../components/watch-card'
+import MessengerPopup from '../components/messenger-popup'
 import { LinkedButton } from '../components/buttons'
 
 const Dashboard = () => {
@@ -46,6 +47,7 @@ const Dashboard = () => {
             </LinkedButton>
           </div>
         </div>
+        <MessengerPopup />
         {watchListCard}
       </section>
       <style jsx>{`
