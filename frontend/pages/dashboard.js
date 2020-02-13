@@ -1,19 +1,21 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 
-import { getCurrentUser } from '../utils/index'
 import Layout from '../components/layout'
 import Sidebar from '../components/sidebar'
 import WatchCard from '../components/watch-card'
 import MessengerPopup from '../components/messenger-popup'
 import { LinkedButton } from '../components/buttons'
+import { userStoreContext } from '../stores/user'
 
 const Dashboard = () => {
   const [watchList, setWatchList] = useState([])
 
+  const userStore = useContext(userStoreContext)
+
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get('api/watch-manager/users/' + getCurrentUser().id)
+      const res = await axios.get('api/watch-manager/users/' + userStore.id)
       const data = res.data
       setWatchList(data)
     }

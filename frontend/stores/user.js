@@ -1,11 +1,11 @@
 import { observable } from 'mobx'
 import { createContext } from 'react'
 import axios from 'axios'
+import { Cookies } from 'react-cookie'
 
-import { getCurrentUser } from '../utils'
-
+const cookies = new Cookies()
 class UserStore {
-  @observable id = getCurrentUser().id
+  @observable id = cookies.get('userID')
   @observable name = ''
   @observable username = ''
   @observable avatar = ''
