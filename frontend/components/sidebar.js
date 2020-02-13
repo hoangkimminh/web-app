@@ -1,5 +1,7 @@
 import { useEffect, useContext } from 'react'
 import { observer } from 'mobx-react-lite'
+import Router from 'next/router'
+
 import { userStoreContext } from '../stores/user'
 
 const Sidebar = observer(() => {
@@ -17,8 +19,8 @@ const Sidebar = observer(() => {
         </figure>
       </div>
       <h6 className='title is-6 has-text-centered'>
-        {userStore.name}&nbsp;&nbsp;&nbsp;
-        <span className='tag is-rounded is-dark'>normal</span>
+        {userStore.username ? userStore.username : userStore.name}&nbsp;&nbsp;&nbsp;
+        <span className='tag is-rounded is-dark'>{userStore.privilege}</span>
       </h6>
 
       <p className='menu-label'>NOTIFICATIONS</p>
@@ -47,7 +49,7 @@ const Sidebar = observer(() => {
       <p className='menu-label'>ACCOUNT</p>
       <ul className='menu-list'>
         <li>
-          <a href='#'>
+          <a onClick={() => {Router.push('/profile')}}>
             <span className='icon'>
               <ion-icon name='person' />
             </span>

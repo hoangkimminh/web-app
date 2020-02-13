@@ -66,7 +66,7 @@ const WatchCard = (props) => {
                       <tr key={i}>
                         <td>{target.name}</td>
                         <td>{target.cssSelector}</td>
-                        <td>{target.value ? target.value : 'No value'}</td>
+                        <td>{target.data ? target.data : 'No value'}</td>
                       </tr>
                     )
                   })}
