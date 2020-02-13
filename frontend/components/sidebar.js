@@ -1,10 +1,7 @@
 import { useEffect, useContext } from 'react'
 import { observer } from 'mobx-react-lite'
-<<<<<<< HEAD
 import Router from 'next/router'
 
-=======
->>>>>>> 527104493bf1c3af0c13b509f4d6ecc2a5de875a
 import { userStoreContext } from '../stores/user'
 
 const Sidebar = observer(() => {

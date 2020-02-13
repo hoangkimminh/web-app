@@ -7,7 +7,6 @@ import { getCurrentUser } from '../utils'
 class UserStore {
   @observable id = getCurrentUser().id
   @observable name = ''
-<<<<<<< HEAD
   @observable username = ''
   @observable avatar = ''
   @observable email = ''
@@ -16,10 +15,6 @@ class UserStore {
   @observable privilege = ''
   @observable createAt = ''
   @observable updatedAt = ''
-=======
-  @observable avatar = ''
-  @observable email = ''
->>>>>>> 527104493bf1c3af0c13b509f4d6ecc2a5de875a
 
   async fetchUser() {
     try {
@@ -27,7 +22,6 @@ class UserStore {
       if (response.status === 200) {
         const user = response.data
         this.name = user.name
-<<<<<<< HEAD
         this.username = user.username
         this.avatar = user.avatar
         this.email = user.email
@@ -36,10 +30,6 @@ class UserStore {
         this.privilege = user.privilege
         this.createAt = user.createAt
         this.updatedAt = user.updatedAt
-=======
-        this.avatar = user.avatar
-        this.email = user.email
->>>>>>> 527104493bf1c3af0c13b509f4d6ecc2a5de875a
       }
     } catch (error) {
       console.error(error)
