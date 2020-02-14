@@ -4,6 +4,7 @@ import axios from 'axios'
 import { Cookies } from 'react-cookie'
 
 const cookies = new Cookies()
+
 class UserStore {
   @observable id = cookies.get('userID')
   @observable name = ''
@@ -13,7 +14,7 @@ class UserStore {
   @observable birthday = ''
   @observable linkedAccounts = { facebook: '', messenger: '', google: '' }
   @observable privilege = ''
-  @observable createAt = ''
+  @observable createdAt = ''
   @observable updatedAt = ''
 
   async fetchUser() {
@@ -28,7 +29,7 @@ class UserStore {
         this.birthday = user.birthday
         this.linkedAccounts = user.linkedAccounts
         this.privilege = user.privilege
-        this.createAt = user.createAt
+        this.createdAt = user.createdAt
         this.updatedAt = user.updatedAt
       }
     } catch (error) {

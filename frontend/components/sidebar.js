@@ -1,6 +1,5 @@
 import { useEffect, useContext } from 'react'
 import { observer } from 'mobx-react-lite'
-import Router from 'next/router'
 import Link from 'next/link'
 
 import { userStoreContext } from '../stores/user'
