@@ -1,14 +1,21 @@
 import { observable } from 'mobx'
 import { createContext } from 'react'
 import axios from 'axios'
+import { Cookies } from 'react-cookie'
 
-import { getCurrentUser } from '../utils'
+const cookies = new Cookies()
 
 class UserStore {
-  @observable id = getCurrentUser().id
+  @observable id = cookies.get('userID')
   @observable name = ''
+  @observable username = ''
   @observable avatar = ''
   @observable email = ''
+  @observable birthday = ''
+  @observable linkedAccounts = { facebook: '', messenger: '', google: '' }
+  @observable privilege = ''
+  @observable createdAt = ''
+  @observable updatedAt = ''
 
   async fetchUser() {
     try {
@@ -16,8 +23,14 @@ class UserStore {
       if (response.status === 200) {
         const user = response.data
         this.name = user.name
+        this.username = user.username
         this.avatar = user.avatar
         this.email = user.email
+        this.birthday = user.birthday
+        this.linkedAccounts = user.linkedAccounts
+        this.privilege = user.privilege
+        this.createdAt = user.createdAt
+        this.updatedAt = user.updatedAt
       }
     } catch (error) {
       console.error(error)

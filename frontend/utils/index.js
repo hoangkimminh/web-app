@@ -1,10 +1,6 @@
-import { Cookies } from 'react-cookie'
-
 const SECONDS_PER_MINUTE = 60
 const SECONDS_PER_HOUR = 60 * SECONDS_PER_MINUTE
 const SECONDS_PER_DAY = 24 * SECONDS_PER_HOUR
-
-const cookies = new Cookies()
 
 const secondsToHumanTime = (s) => {
   let d, h, m
@@ -30,11 +26,4 @@ const secondsToHumanTime = (s) => {
   return `${days} ${hours} ${minutes} ${seconds}`
 }
 
-const getCurrentUser = () => {
-  return {
-    id: cookies.get('userID'),
-    jwt: cookies.get('jwt')
-  }
-}
-
-export { secondsToHumanTime, getCurrentUser }
+export { secondsToHumanTime }

@@ -1,5 +1,7 @@
 import { useEffect, useContext } from 'react'
 import { observer } from 'mobx-react-lite'
+import Link from 'next/link'
+
 import { userStoreContext } from '../stores/user'
 
 const Sidebar = observer(() => {
@@ -18,7 +20,7 @@ const Sidebar = observer(() => {
       </div>
       <h6 className='title is-6 has-text-centered'>
         {userStore.name}&nbsp;&nbsp;&nbsp;
-        <span className='tag is-rounded is-dark'>normal</span>
+        <span className='tag is-rounded is-dark'>{userStore.privilege}</span>
       </h6>
 
       <p className='menu-label'>NOTIFICATIONS</p>
@@ -47,12 +49,14 @@ const Sidebar = observer(() => {
       <p className='menu-label'>ACCOUNT</p>
       <ul className='menu-list'>
         <li>
-          <a href='#'>
-            <span className='icon'>
-              <ion-icon name='person' />
-            </span>
-            <span>&nbsp;Profile</span>
-          </a>
+          <Link href='/profile'>
+            <a>
+              <span className='icon'>
+                <ion-icon name='person' />
+              </span>
+              <span>&nbsp;Profile</span>
+            </a>
+          </Link>
         </li>
         <li>
           <a href='#'>
