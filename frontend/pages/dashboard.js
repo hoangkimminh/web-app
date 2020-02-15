@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 
-import Layout from '../components/layout'
-import Sidebar from '../components/sidebar'
+import Layout from '../components/layouts/layout'
+import Sidebar from '../components/layouts/side-bar'
 import WatchCard from '../components/watch-card'
 import MessengerPopup from '../components/messenger-popup'
 import { LinkedButton } from '../components/buttons'

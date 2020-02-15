@@ -1,5 +1,5 @@
-import { LinkedButton } from '../components/buttons'
-import Layout from '../components/layout'
+import { LinkedButton } from '../components/common/buttons'
+import Layout from '../components/layouts/layout'
 
 const LoginForm = () => (
   <form onSubmit={(event) => event.preventDefault()}>

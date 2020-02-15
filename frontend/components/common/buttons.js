@@ -1,14 +1,12 @@
 import Link from 'next/link'
 
-const LinkedButton = (props) => {
-  const { className, href = '#', children, style, disabled } = props
+export const LinkedButton = (props) => {
+  const { className, href = '#', as, children, style, disabled } = props
   return (
-    <Link href={href}>
+    <Link href={href} as={as}>
       <button className={className} style={style} disabled={disabled}>
         {children}
       </button>
     </Link>
   )
 }
-
-export { LinkedButton }

@@ -80,7 +80,7 @@ const PersonalInformation = observer((props) => {
             name='Username'
             value={userStore.username}
             type='text'
-            icon='eyse'
+            icon='eye'
             isReadOnly={props.isReadOnly}
           />
           {/* Gender field */}

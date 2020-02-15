@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 
-import Layout from '../components/layout'
-import Sidebar from '../components/sidebar'
+import Layout from '../components/layouts/layout'
+import Sidebar from '../components/layouts/side-bar'
 import {
   General,
   PersonalInformation,
