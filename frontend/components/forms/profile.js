@@ -90,8 +90,8 @@ const PersonalInformation = observer((props) => {
             </div>
             <div className='field-body'>
               <div className='field'>
-                <div class='control has-icons-left'>
-                  <div class='select'>
+                <div className='control has-icons-left'>
+                  <div className='select'>
                     <select>
                       <option>Male</option>
                       <option>Female</option>
@@ -127,6 +127,49 @@ const PersonalInformation = observer((props) => {
   )
 })
 
+const LinkedAccountsField = (props) => {
+  return (
+    <div className='field is-horizontal'>
+      <div className='field-label is-normal'>
+        <label className='label'>{props.service}</label>
+      </div>
+      <div className='field-body'>
+        {props.id && (
+          <div className='field is-grouped'>
+            <div className='control has-icons-left has-icons-right'>
+              <input className='input' type='text' defaultValue={props.id} readOnly />
+              <span className='icon is-left'>
+                {props.icon && <ion-icon name={props.icon} />}
+                {!props.icon && <ion-icon src={props.src} />}
+              </span>
+            </div>
+            {props.isUnconnectAvailable && (
+              <div className='control'>
+                <button className='button is-light'>
+                  <span className='icon'>
+                    <ion-icon name='close' />
+                  </span>
+                  <span>Unconnect</span>
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+        {!props.id && (
+          <div className='control'>
+            <button className='button is-link'>
+              <span className='icon'>
+                <ion-icon name='link' />
+              </span>
+              <span>Connect</span>
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
 const LinkedAccounts = observer((props) => {
   const userStore = props.userStore
 
@@ -136,110 +179,26 @@ const LinkedAccounts = observer((props) => {
         <div className='column is-hafl-desktop is-three-quarters-tablet is-full-mobile'>
           <p className='title is-size-4'>Linked Accounts</p>
           {/* Facebook field */}
-          <div className='field is-horizontal'>
-            <div className='field-label is-normal'>
-              <label className='label'>Facebook</label>
-            </div>
-            <div className='field-body'>
-              {userStore.linkedAccounts.facebook && (
-                <div className='field is-grouped'>
-                  <div className='control has-icons-left has-icons-right'>
-                    <input
-                      className='input'
-                      type='text'
-                      defaultValue={userStore.linkedAccounts.facebook}
-                      placeholder='Your Facebook ID'
-                      readOnly
-                    />
-                    <span className='icon is-left'>
-                      <ion-icon name='logo-facebook' />
-                    </span>
-                  </div>
-                  <div className='control'>
-                    <button className='button is-light'>
-                      <span className='icon'>
-                        <ion-icon name='close' />
-                      </span>
-                      <span>Unconnect</span>
-                    </button>
-                  </div>
-                </div>
-              )}
-              {!userStore.linkedAccounts.facebook && (
-                <div className='control'>
-                  <button className='button is-link'>
-                    <span className='icon'>
-                      <ion-icon name='link' />
-                    </span>
-                    <span>Connect</span>
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
+          <LinkedAccountsField
+            service='Facebook'
+            id={userStore.linkedAccounts.facebook}
+            isUnconnectAvailable={true}
+            icon='logo-facebook'
+          />
           {/* Messenger field */}
-          <div className='field is-horizontal'>
-            <div className='field-label is-normal'>
-              <label className='label'>Messenger</label>
-            </div>
-            <div className='field-body'>
-              <div className='field'>
-                <div className='control has-icons-left has-icons-right'>
-                  <input
-                    className='input'
-                    type='text'
-                    defaultValue={userStore.linkedAccounts.messenger}
-                    readOnly
-                  />
-                  <span className='icon is-left'>
-                    <ion-icon src='/static/messenger-icon.svg' />
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <LinkedAccountsField
+            service='Messenger'
+            id={userStore.linkedAccounts.messenger}
+            isUnconnectAvailable={false}
+            src='/static/messenger-icon.svg'
+          />
           {/* Google field */}
-          <div className='field is-horizontal'>
-            <div className='field-label is-normal'>
-              <label className='label'>Google</label>
-            </div>
-            <div className='field-body'>
-              {userStore.linkedAccounts.google && (
-                <div className='field is-grouped'>
-                  <div className='control has-icons-left has-icons-right'>
-                    <input
-                      className='input'
-                      type='text'
-                      defaultValue={userStore.linkedAccounts.google}
-                      placeholder='Your Google ID'
-                      readOnly
-                    />
-                    <span className='icon is-left'>
-                      <ion-icon name='logo-google' />
-                    </span>
-                  </div>
-                  <div className='control'>
-                    <button className='button is-light'>
-                      <span className='icon'>
-                        <ion-icon name='close' />
-                      </span>
-                      <span>Unconnect</span>
-                    </button>
-                  </div>
-                </div>
-              )}
-              {!userStore.linkedAccounts.google && (
-                <div className='control'>
-                  <button className='button is-link'>
-                    <span className='icon'>
-                      <ion-icon name='link' />
-                    </span>
-                    <span>Connect</span>
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
+          <LinkedAccountsField
+            service='Google'
+            id={userStore.linkedAccounts.google}
+            isUnconnectAvailable={true}
+            icon='logo-google'
+          />
         </div>
       </div>
     </section>
@@ -248,43 +207,103 @@ const LinkedAccounts = observer((props) => {
 
 const Security = (props) => {
   return (
-      <section className='is-paddingless'>
-        <div className='columns is-centered'>
-          <div className='column is-hafl-desktop is-three-quarters-tablet is-full-mobile'>
-            <p className='title is-size-4'>Security</p>
-            {/* Change password field */}
-
-            <div className='field is-horizontal'>
-              <div className='field-label is-normal'>
-                <label className='label'>Password</label>
+    <section className='is-paddingless'>
+      <div className='columns is-centered'>
+        <div className='column is-hafl-desktop is-three-quarters-tablet is-full-mobile'>
+          <p className='title is-size-4'>Security</p>
+          {/* Change password field */}
+          <div className='field is-horizontal'>
+            <div className='field-label is-normal'>
+              <label className='label'>Password</label>
+            </div>
+            <div className='field-body'>
+              <div className='field'>
+                <p className='control is-expanded has-icons-left'>
+                  <input className='input' type='password' placeholder='New password' />
+                  <span className='icon is-left'>
+                    <ion-icon name='key' />
+                  </span>
+                </p>
               </div>
-              <div className='field-body'>
-                <div className='field'>
-                  <p className='control is-expanded has-icons-left'>
-                    <input className='input' type='password' placeholder='New password' />
-                    <span className='icon is-left'>
-                      <ion-icon name='key' />
-                    </span>
-                  </p>
-                </div>
-                <div className='field'>
-                  <p className='control is-expanded has-icons-left has-icons-right'>
-                    <input
-                      className='input'
-                      type='password'
-                      placeholder='Repeat password'
-                    />
-                    <span className='icon is-left'>
-                      <ion-icon name='key' />
-                    </span>
-                  </p>
-                </div>
+              <div className='field'>
+                <p className='control is-expanded has-icons-left has-icons-right'>
+                  <input
+                    className='input'
+                    type='password'
+                    placeholder='Repeat password'
+                  />
+                  <span className='icon is-left'>
+                    <ion-icon name='key' />
+                  </span>
+                </p>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
   )
 }
 
-export { General, PersonalInformation, LinkedAccounts, Security }
+const SubmitFormField = (props) => {
+  return (
+    <div className='columns is-centered'>
+      <div className='column is-hafl-desktop is-three-quarters-tablet is-full-mobile'>
+        {props.isReadOnly && (
+          /* Edit button */
+          <div className='field is-horizontal'>
+            <div className='field-label is-normal'>
+              <label className='label'></label>
+            </div>
+            <div className='field-body'>
+              <p className='control'>
+                <button
+                  className='button is-primary'
+                  onClick={(e) => {
+                    e.preventDefault()
+                    props.setReadOnly(false)
+                  }}
+                >
+                  <span className='icon'>
+                    <ion-icon name='create' />
+                  </span>
+                  <span>Edit</span>
+                </button>
+              </p>
+            </div>
+          </div>
+        )}
+        {!props.isReadOnly && (
+          /* Submit field */
+          <label className='field is-horizontal'>
+            <label className='field-label is-normal'>
+              <label className='label'> </label>
+            </label>
+            <div className='field-body is-grouped'>
+              <button className='button is-primary'>
+                <span className='icon'>
+                  <ion-icon name='checkmark' />
+                </span>
+                <span>Save changes</span>
+              </button>
+              <button
+                className='button is-light'
+                onClick={(e) => {
+                  e.preventDefault()
+                  props.setReadOnly(true)
+                }}
+              >
+                <span className='icon'>
+                  <ion-icon name='close' />
+                </span>
+                <span>Cancel</span>
+              </button>
+            </div>
+          </label>
+        )}
+      </div>
+    </div>
+  )
+}
+
+export { General, PersonalInformation, LinkedAccounts, Security, SubmitFormField }
