@@ -2,9 +2,9 @@ import { useEffect, useContext } from 'react'
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 
-import { userStoreContext } from '../stores/user'
+import { userStoreContext } from '../../stores/user'
 
-const Sidebar = observer(() => {
+const SideBar = observer(() => {
   const userStore = useContext(userStoreContext)
 
   useEffect(() => {
@@ -29,27 +29,31 @@ const Sidebar = observer(() => {
       <p className='menu-label'>WATCHES</p>
       <ul className='menu-list'>
         <li>
-          <a href='#'>
-            <span className='icon'>
-              <ion-icon name='eye' />
-            </span>
-            <span>&nbsp;Manage watches</span>
-          </a>
+          <Link href='/dashboard/[entry]/[subentry]' as='/dashboard/watch/manage'>
+            <a>
+              <span className='icon'>
+                <ion-icon name='eye' />
+              </span>
+              <span>&nbsp;Manage watches</span>
+            </a>
+          </Link>
         </li>
         <li>
-          <a href='#'>
-            <span className='icon'>
-              <ion-icon name='analytics' />
-            </span>
-            <span>&nbsp;Analytics</span>
-          </a>
+          <Link href='/dashboard/[entry]/[subentry]' as='/dashboard/watch/analytics'>
+            <a>
+              <span className='icon'>
+                <ion-icon name='analytics' />
+              </span>
+              <span>&nbsp;Analytics</span>
+            </a>
+          </Link>
         </li>
       </ul>
 
       <p className='menu-label'>ACCOUNT</p>
       <ul className='menu-list'>
         <li>
-          <Link href='/profile'>
+          <Link href='/dashboard/[entry]/[subentry]' as='/dashboard/account/profile'>
             <a>
               <span className='icon'>
                 <ion-icon name='person' />
@@ -59,20 +63,24 @@ const Sidebar = observer(() => {
           </Link>
         </li>
         <li>
-          <a href='#'>
-            <span className='icon'>
-              <ion-icon name='settings' />
-            </span>
-            <span>&nbsp;Settings</span>
-          </a>
+          <Link href='/dashboard/[entry]/[subentry]' as='/dashboard/account/settings'>
+            <a>
+              <span className='icon'>
+                <ion-icon name='settings' />
+              </span>
+              <span>&nbsp;Settings</span>
+            </a>
+          </Link>
         </li>
         <li>
-          <a className='has-text-danger' href='#'>
-            <span className='icon'>
-              <ion-icon name='log-out' />
-            </span>
-            <span>&nbsp;Logout</span>
-          </a>
+          <Link href='/logout'>
+            <a className='has-text-danger'>
+              <span className='icon'>
+                <ion-icon name='log-out' />
+              </span>
+              <span>&nbsp;Logout</span>
+            </a>
+          </Link>
         </li>
       </ul>
       <style jsx>{`
@@ -95,4 +103,4 @@ const Sidebar = observer(() => {
   )
 })
 
-export default Sidebar
+export default SideBar

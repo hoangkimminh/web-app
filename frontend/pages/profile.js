@@ -1,8 +1,8 @@
-import { useEffect, useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 
-import Layout from '../components/layout'
-import Sidebar from '../components/sidebar'
+import Layout from '../components/layouts/layout'
+import Sidebar from '../components/layouts/sidebar'
 import { userStoreContext } from '../stores/user'
 
 const Profile = () => {
@@ -109,8 +109,8 @@ const PersonalInformation = observer((props) => {
               </div>
               <div className='field-body'>
                 <div className='field'>
-                  <div class='control has-icons-left'>
-                    <div class='select'>
+                  <div className='control has-icons-left'>
+                    <div className='select'>
                       <select>
                         <option>Male</option>
                         <option>Female</option>
@@ -291,7 +291,7 @@ const LinkedAccounts = observer((props) => {
                       readOnly
                     />
                     <span className='icon is-left'>
-                      <ion-icon src='/static/messenger-icon.svg' />
+                      <ion-icon src='/static/icon-messenger.svg' />
                     </span>
                   </div>
                 </div>

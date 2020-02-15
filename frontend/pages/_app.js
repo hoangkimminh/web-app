@@ -1,7 +1,5 @@
-import '../styles/index.scss'
+import '../styles.scss'
 
-const MyApp = ({ Component, pageProps }) => (
-    <Component {...pageProps} />
-)
+const MyApp = ({ Component, pageProps }) => <Component {...pageProps} />
 
 export default MyApp

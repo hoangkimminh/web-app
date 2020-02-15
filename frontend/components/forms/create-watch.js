@@ -1,9 +1,10 @@
-import { useCallback, useReducer, useState } from 'react'
 import axios from 'axios'
+import { useCallback, useContext, useReducer, useState } from 'react'
+import { userStoreContext } from '../../stores/user'
 import { secondsToHumanTime } from '../../utils'
-import { getCurrentUser } from '../../utils/index'
 
-const Form = () => {
+const CreateWatchForm = () => {
+  const userStore = useContext(userStoreContext)
   const [url, changeUrl] = useState('')
   const [interval, changeInterval] = useState() // in seconds
   const [cssSelectors, dispatchCssSelectors] = useReducer(
@@ -18,7 +19,7 @@ const Form = () => {
   const submit = useCallback(() => {
     const targets = cssSelectors
     axios.post('/api/watch-manager', {
-      userID: getCurrentUser().id,
+      userID: userStore.id,
       url,
       interval,
       targets
@@ -158,4 +159,4 @@ const CssSelectorRow = (props) => {
   )
 }
 
-export default Form
+export default CreateWatchForm

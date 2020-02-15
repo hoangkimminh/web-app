@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 
-import { secondsToHumanTime } from '../utils'
+import { secondsToHumanTime } from '../../utils'
 
 const WatchCard = (props) => {
   const [active, setActive] = useState(props.active)
