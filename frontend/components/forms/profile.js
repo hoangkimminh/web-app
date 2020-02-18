@@ -1,5 +1,7 @@
 import { observer } from 'mobx-react-lite'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+
+import { userStoreContext } from '../../stores/user'
 
 const General = observer((props) => {
   const userStore = props.userStore
@@ -190,7 +192,7 @@ const LinkedAccounts = observer((props) => {
             service='Messenger'
             id={userStore.linkedAccounts.messenger}
             isUnconnectAvailable={false}
-            src='/static/messenger-icon.svg'
+            src='/static/icon-messenger.svg'
           />
           {/* Google field */}
           <LinkedAccountsField
@@ -306,4 +308,24 @@ const SubmitFormField = (props) => {
   )
 }
 
-export { General, PersonalInformation, LinkedAccounts, Security, SubmitFormField }
+const ProfileForm = () => {
+  const userStore = useContext(userStoreContext)
+
+  const [isReadOnly, setReadOnly] = useState(true)
+
+  return (
+    <form>
+      <General userStore={userStore} />
+      <PersonalInformation userStore={userStore} isReadOnly={isReadOnly} />
+      <LinkedAccounts userStore={userStore} isReadOnly={isReadOnly} />
+      {!isReadOnly && <Security />}
+      <SubmitFormField
+        userStore={userStore}
+        isReadOnly={isReadOnly}
+        setReadOnly={setReadOnly}
+      />
+    </form>
+  )
+}
+
+export default ProfileForm
