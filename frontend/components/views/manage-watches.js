@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useContext, useEffect, useState } from 'react'
 import { userStoreContext } from '../../stores/user'
 
-import WatchCard from '../../components/watch/card'
+import WatchCard from '../watch/card'
 
 const ManageWatchesView = () => {
   const [watchList, setWatchList] = useState([])
