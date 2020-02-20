@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite'
 import { useState, useContext } from 'react'
 
 import { userStoreContext } from '../../stores/user'
+import InputField from '../common/input-field'
 
 const General = observer((props) => {
   const userStore = props.userStore
@@ -34,31 +35,6 @@ const General = observer((props) => {
   )
 })
 
-const PersonalInformationInputField = (props) => {
-  return (
-    <div className='field is-horizontal'>
-      <div className='field-label is-normal'>
-        <label className='label'>{props.name}</label>
-      </div>
-      <div className='field-body'>
-        <div className='field'>
-          <div className='control has-icons-left has-icons-right'>
-            <input
-              className='input'
-              type={props.type}
-              defaultValue={props.value}
-              readOnly={props.isReadOnly}
-            />
-            <span className='icon is-left'>
-              <ion-icon name={props.icon} />
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
 const PersonalInformation = observer((props) => {
   // const [isReadOnly, setReadOnly] = useState(true)
 
@@ -70,19 +46,19 @@ const PersonalInformation = observer((props) => {
         <div className='column is-hafl-desktop is-three-quarters-tablet is-full-mobile'>
           <p className='title is-size-4'>Personal Information</p>
           {/* Name field */}
-          <PersonalInformationInputField
+          <InputField
             name='Name'
             value={userStore.name}
             type='text'
-            icon='person'
+            iconName='person'
             isReadOnly={props.isReadOnly}
           />
           {/* Username field */}
-          <PersonalInformationInputField
+          <InputField
             name='Username'
             value={userStore.username}
             type='text'
-            icon='eye'
+            iconName='eye'
             isReadOnly={props.isReadOnly}
           />
           {/* Gender field */}
@@ -108,19 +84,19 @@ const PersonalInformation = observer((props) => {
             </div>
           </div>
           {/* Email field */}
-          <PersonalInformationInputField
+          <InputField
             name='Email'
             value={userStore.email}
             type='email'
-            icon='mail'
+            iconName='mail'
             isReadOnly={props.isReadOnly}
           />
           {/* Birthday field */}
-          <PersonalInformationInputField
+          <InputField
             name='Birthday'
             value={userStore.birthday}
             type='date'
-            icon='calendar'
+            iconName='calendar'
             isReadOnly={props.isReadOnly}
           />
         </div>
@@ -185,21 +161,21 @@ const LinkedAccounts = observer((props) => {
             service='Facebook'
             id={userStore.linkedAccounts.facebook}
             isUnconnectAvailable={true}
-            icon='logo-facebook'
+            iconName='logo-facebook'
           />
           {/* Messenger field */}
           <LinkedAccountsField
             service='Messenger'
             id={userStore.linkedAccounts.messenger}
             isUnconnectAvailable={false}
-            src='/static/icon-messenger.svg'
+            iconSrc='/static/icon-messenger.svg'
           />
           {/* Google field */}
           <LinkedAccountsField
             service='Google'
             id={userStore.linkedAccounts.google}
             isUnconnectAvailable={true}
-            icon='logo-google'
+            iconName='logo-google'
           />
         </div>
       </div>
