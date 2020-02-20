@@ -1,3 +1,5 @@
 import CreateWatchForm from '../forms/create-watch'
 
-export default () => <CreateWatchForm />
+const CreateWatchView = () => <CreateWatchForm />
+
+export default CreateWatchView
