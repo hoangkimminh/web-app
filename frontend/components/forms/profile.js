@@ -20,7 +20,7 @@ const General = observer((props) => {
       </h6>
       <div className='file has-name is-centered'>
         <label className='file-label'>
-          <input className='file-input' type='file' name='resume' />
+          <input className='file-input' type='file' label='resume' />
           <span className='file-cta'>
             <span className='file-icon'>
               <ion-icon name='cloud-upload' />
@@ -36,7 +36,6 @@ const General = observer((props) => {
 })
 
 const PersonalInformation = observer((props) => {
-  // const [isReadOnly, setReadOnly] = useState(true)
 
   const userStore = props.userStore
 
@@ -47,19 +46,19 @@ const PersonalInformation = observer((props) => {
           <p className='title is-size-4'>Personal Information</p>
           {/* Name field */}
           <InputField
-            name='Name'
+            label='Name'
             value={userStore.name}
             type='text'
             iconName='person'
-            isReadOnly={props.isReadOnly}
+            readOnly={props.readOnly}
           />
           {/* Username field */}
           <InputField
-            name='Username'
+            label='Username'
             value={userStore.username}
             type='text'
             iconName='eye'
-            isReadOnly={props.isReadOnly}
+            readOnly={props.readOnly}
           />
           {/* Gender field */}
           <div className='field is-horizontal'>
@@ -77,7 +76,7 @@ const PersonalInformation = observer((props) => {
                     </select>
                   </div>
                   <span className='icon is-left'>
-                    <ion-icon name='male-female' />
+                    <ion-icon label='male-female' />
                   </span>
                 </div>
               </div>
@@ -85,19 +84,19 @@ const PersonalInformation = observer((props) => {
           </div>
           {/* Email field */}
           <InputField
-            name='Email'
+            label='Email'
             value={userStore.email}
             type='email'
             iconName='mail'
-            isReadOnly={props.isReadOnly}
+            readOnly={props.readOnly}
           />
           {/* Birthday field */}
           <InputField
-            name='Birthday'
+            label='Birthday'
             value={userStore.birthday}
             type='date'
             iconName='calendar'
-            isReadOnly={props.isReadOnly}
+            readOnly={props.readOnly}
           />
         </div>
       </div>
@@ -227,7 +226,7 @@ const SubmitFormField = (props) => {
   return (
     <div className='columns is-centered'>
       <div className='column is-hafl-desktop is-three-quarters-tablet is-full-mobile'>
-        {props.isReadOnly && (
+        {props.readOnly && (
           /* Edit button */
           <div className='field is-horizontal'>
             <div className='field-label is-normal'>
@@ -251,7 +250,7 @@ const SubmitFormField = (props) => {
             </div>
           </div>
         )}
-        {!props.isReadOnly && (
+        {!props.readOnly && (
           /* Submit field */
           <label className='field is-horizontal'>
             <label className='field-label is-normal'>
@@ -287,17 +286,17 @@ const SubmitFormField = (props) => {
 const ProfileForm = () => {
   const userStore = useContext(userStoreContext)
 
-  const [isReadOnly, setReadOnly] = useState(true)
+  const [readOnly, setReadOnly] = useState(true)
 
   return (
     <form>
       <General userStore={userStore} />
-      <PersonalInformation userStore={userStore} isReadOnly={isReadOnly} />
-      <LinkedAccounts userStore={userStore} isReadOnly={isReadOnly} />
-      {!isReadOnly && <Security />}
+      <PersonalInformation userStore={userStore} readOnly={readOnly} />
+      <LinkedAccounts userStore={userStore} readOnly={readOnly} />
+      {!readOnly && <Security />}
       <SubmitFormField
         userStore={userStore}
-        isReadOnly={isReadOnly}
+        readOnly={readOnly}
         setReadOnly={setReadOnly}
       />
     </form>

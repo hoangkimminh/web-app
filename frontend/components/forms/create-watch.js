@@ -23,7 +23,7 @@ const CreateWatchForm = () => {
     axios.post('/api/watch-manager', {
       userID: userStore.id,
       url,
-      interval: parseInt(interval),
+      interval,
       targets
     })
   }, [url, interval, cssSelectors])
@@ -31,19 +31,19 @@ const CreateWatchForm = () => {
   return (
     <form onSubmit={(ev) => ev.preventDefault()}>
       <InputField
-        name='URL'
+        label='URL'
         iconName='link'
         type='url'
         placeholder='https://example.com'
-        onChange={changeUrl}
+        onChange={(e) => changeUrl(e.target.value)}
         value={url}
         required={true}
       />
       <InputField
-        name='Interval'
+        label='Interval'
         iconName='options'
         type='number'
-        onChange={changeInterval}
+        onChange={(e) => changeInterval(parseInt(e.target.value))}
         value={interval}
         min={15 * 60}
         step={1}
