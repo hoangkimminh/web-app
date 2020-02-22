@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import CreateWatchView from '../../../components/views/create-watch'
 import ManageWatchesView from '../../../components/views/manage-watches'
@@ -9,7 +10,7 @@ import MessengerPopup from '../../../components/messenger-popup'
 
 const Dashboard = () => {
   const router = useRouter()
-  const { entry, subentry } = router.query
+  const { entry = 'watch', subentry = 'manage' } = router.query
   let main
   if (entry === 'watch' && subentry === 'create') main = <CreateWatchView />
   else if (entry === 'watch' && subentry === 'manage') main = <ManageWatchesView />
@@ -20,6 +21,9 @@ const Dashboard = () => {
 
   return (
     <Layout left={<SideBar />}>
+      <Head>
+        <title>Dashboard - Night Watch</title>
+      </Head>
       <section className='section'>
         <ActionBar />
         <MessengerPopup />

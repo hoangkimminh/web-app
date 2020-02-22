@@ -1,36 +1,56 @@
+import { useRouter } from 'next/router'
 import { useEffect, useContext } from 'react'
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
-
 import { userStoreContext } from '../../stores/user'
 
-const SideBar = observer(() => {
+const UserInfo = observer(() => {
   const userStore = useContext(userStoreContext)
-
   useEffect(() => {
     userStore.fetchUser()
   })
 
   return (
-    <section className='section has-background-light'>
-      <div className='avatar is-flex'>
-        <figure className='image is-128x128'>
-          <img className='is-rounded' src={userStore.avatar} />
-        </figure>
-      </div>
-      <h6 className='title is-6 has-text-centered'>
-        {userStore.name}&nbsp;&nbsp;&nbsp;
+    <div className='is-flex'>
+      <figure className='image is-128x128'>
+        <img className='is-rounded' src={userStore.avatar} />
+      </figure>
+      <p className='is-flex'>
+        <h6 className='title is-6 is-marginless'>{userStore.name}</h6>
         <span className='tag is-rounded is-dark'>{userStore.privilege}</span>
-      </h6>
+      </p>
+      <style jsx>{`
+        div {
+          flex-direction: column;
+          align-items: center;
+          margin-bottom: 2rem;
+        }
+        figure {
+          margin-bottom: 1rem;
+        }
+        p {
+          align-self: stretch;
+          align-items: baseline;
+          justify-content: space-between;
+        }
+      `}</style>
+    </div>
+  )
+})
 
+const Menu = () => {
+  const router = useRouter()
+  const { subentry = 'manage' } = router.query
+
+  return (
+    <div>
       <p className='menu-label'>NOTIFICATIONS</p>
       <ul className='menu-list'></ul>
-
       <p className='menu-label'>WATCHES</p>
       <ul className='menu-list'>
         <li>
           <Link href='/dashboard/[entry]/[subentry]' as='/dashboard/watch/manage'>
-            <a>
+            <a className={subentry === 'manage' && 'is-active'}>
               <span className='icon'>
                 <ion-icon name='eye' />
               </span>
@@ -40,7 +60,7 @@ const SideBar = observer(() => {
         </li>
         <li>
           <Link href='/dashboard/[entry]/[subentry]' as='/dashboard/watch/analytics'>
-            <a>
+            <a className={subentry === 'analytics' && 'is-active'}>
               <span className='icon'>
                 <ion-icon name='analytics' />
               </span>
@@ -49,12 +69,11 @@ const SideBar = observer(() => {
           </Link>
         </li>
       </ul>
-
       <p className='menu-label'>ACCOUNT</p>
       <ul className='menu-list'>
         <li>
           <Link href='/dashboard/[entry]/[subentry]' as='/dashboard/account/profile'>
-            <a>
+            <a className={subentry === 'profile' && 'is-active'}>
               <span className='icon'>
                 <ion-icon name='person' />
               </span>
@@ -64,7 +83,7 @@ const SideBar = observer(() => {
         </li>
         <li>
           <Link href='/dashboard/[entry]/[subentry]' as='/dashboard/account/settings'>
-            <a>
+            <a className={subentry === 'settings' && 'is-active'}>
               <span className='icon'>
                 <ion-icon name='settings' />
               </span>
@@ -84,23 +103,36 @@ const SideBar = observer(() => {
         </li>
       </ul>
       <style jsx>{`
-        section {
-          height: 100%;
-        }
-        .avatar {
-          align-items: center;
-          justify-content: center;
-          margin-bottom: 1rem;
-        }
-        .tag {
-          font-weight: normal;
-        }
-        li > a > span {
-          vertical-align: middle;
+        div {
+          margin-bottom: 2rem;
         }
       `}</style>
+    </div>
+  )
+}
+
+const Brand = () => {
+  return (
+    <div>
+      <figure className='image is-48x48'>
+        <Link href='/'>
+          <a>
+            <img src='/static/logo-night-watch.svg' />
+          </a>
+        </Link>
+      </figure>
+    </div>
+  )
+}
+
+const SideBar = () => {
+  return (
+    <section className='section has-background-light'>
+      <UserInfo />
+      <Menu />
+      <Brand />
     </section>
   )
-})
+}
 
 export default SideBar

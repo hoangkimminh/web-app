@@ -1,22 +1,24 @@
 const Layout = (props) => {
-  const { left, children, right } = props
+  const { left, children } = props
   return (
-    <article className='columns is-gapless'>
-      {left && (
-        <aside className='column is-hidden-mobile is-4-tablet is-3-widescreen is-paddingless'>
-          {left}
-        </aside>
-      )}
-      <div className='column is-paddingless'>{children}</div>
-      {right && (
-        <aside className='column is-hidden-mobile is-4-tablet is-3-widescreen is-paddingless'>
-          {right}
-        </aside>
-      )}
+    <article className='is-flex'>
+      {left && <aside className='is-hidden-mobile'>{left}</aside>}
+      <aside className='is-hidden-mobile placeholder'></aside>
+      <div>{children}</div>
       <style jsx>{`
-        article {
-          min-width: 100vw;
-          min-height: 100vh;
+        aside {
+          width: 300px;
+        }
+        aside:not(.placeholder) {
+          height: 100vh;
+          position: fixed;
+          overflow-y: scroll;
+        }
+        aside.placeholder {
+          flex-shrink: 0;
+        }
+        div {
+          flex-grow: 1;
         }
       `}</style>
     </article>

@@ -4,7 +4,13 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head />
+        <Head>
+          <link
+            rel='shortcut icon'
+            type='image/svg+xml'
+            href='/static/logo-night-watch.svg'
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />
