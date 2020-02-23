@@ -26,6 +26,8 @@ const ManageWatchesView = () => {
           interval={watch.interval}
           active={watch.active}
           targets={watch.targets}
+          createdAt={watch.createdAt}
+          updatedAt={watch.updatedAt}
         />
       ))}
     </div>

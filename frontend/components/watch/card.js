@@ -6,6 +6,8 @@ import { secondsToHumanTime } from '../../utils'
 const WatchCard = (props) => {
   const [active, setActive] = useState(props.active)
 
+  const { url, _id, interval, targets, updatedAt } = props
+
   const onChangeStatus = async () => {
     try {
       const toggleActive = active ? 'inactive' : 'active'
@@ -21,51 +23,72 @@ const WatchCard = (props) => {
   }
 
   return (
-    <div className='box'>
-      <div className='card-content'>
-        <div className='content'>
-          <div className='card-field'>
-            <span className='has-text-weight-bold'>URL: </span>
-            <span>
-              <a href={props.url}>{props.url}</a>
-            </span>
-            <hr />
-          </div>
-          <div className='card-field'>
-            <span className='has-text-weight-bold'>Active:&nbsp;</span>
+    <div className='card'>
+      <header className='card-header has-background-white-bis'>
+        <p className='card-header-title'>
+          <a href={url} target='_blank'>
+            {url}
+          </a>
+        </p>
+        <div className='card-header-icon'>
+          <div>
             <input
-              id={'switchActive' + props._id}
+              id={'switchActive' + _id}
               type='checkbox'
-              name={'switchActive' + props._id}
+              name={'switchActive' + _id}
               className='switch is-rounded'
               checked={active}
               onChange={onChangeStatus}
             />
-            <label htmlFor={'switchActive' + props._id}> </label>
+            <label htmlFor={'switchActive' + _id}> </label>
           </div>
+        </div>
+        <div className='card-header-icon is-paddingless has-text-primary'>
+          <span className='icon is-large'>
+            <ion-icon name='create' />
+          </span>
+        </div>
+        <div className='card-header-icon is-paddingless has-text-danger'>
+          <span className='icon is-large'>
+            <ion-icon name='close' />
+          </span>
+        </div>
+      </header>
+      <div className='card-content'>
+        <div className='content'>
           <div className='card-field'>
             <span className='has-text-weight-bold'>Interval: </span>
-            <span>{secondsToHumanTime(props.interval)}</span>
+            <span>{secondsToHumanTime(interval)}</span>
           </div>
           <div className='card-field'>
             <span className='has-text-weight-bold'>Targets: </span>
+            <span>{targets.length}</span>
           </div>
+          <div className='columns is-gapless'>
+            <div className='column is-6 card-field'>
+              <span className='has-text-weight-bold'>Last check: </span>
+              <span>NULL</span>
+            </div>
+            <div className='column is-6 card-field'>
+              <span className='has-text-weight-bold'>Last update: </span>
+              <span>{updatedAt}</span>
+            </div>
+          </div>
+          <hr />
           <div className='card-field'>
             <table className='table is-hoverable'>
               <thead>
                 <tr>
                   <th>Name</th>
-                  <th>CSS Selector</th>
                   <th>Value</th>
                 </tr>
               </thead>
               <tbody>
-                {Array.isArray(props.targets) &&
-                  props.targets.map((target, i) => {
+                {Array.isArray(targets) &&
+                  targets.map((target, i) => {
                     return (
                       <tr key={i}>
                         <td>{target.name}</td>
-                        <td>{target.cssSelector}</td>
                         <td>{target.data ? target.data : 'NULL'}</td>
                       </tr>
                     )
@@ -74,23 +97,26 @@ const WatchCard = (props) => {
             </table>
           </div>
         </div>
-        <div className='card-field'>
-          <div className='buttons'>
-            <button className='button is-primary'>
-              <span className='icon'>
-                <ion-icon name='create'></ion-icon>
-              </span>
-              <span>Edit</span>
-            </button>
-            <button className='button is-danger'>
-              <span className='icon'>
-                <ion-icon name='trash'></ion-icon>
-              </span>
-              <span>Delete</span>
-            </button>
-          </div>
-        </div>
       </div>
+      <style jsx>{`
+        .card {
+          margin-bottom: 2rem;
+        }
+        .card-header-icon {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+        @media screen and (max-width: 738px) {
+          .card-header-title {
+            width: 100px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+          }
+        }
+      `}</style>
     </div>
   )
 }
