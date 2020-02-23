@@ -5,7 +5,7 @@ $box-padding: 1rem;
 
 $input-focus-border-color: $input-hover-border-color;
 $input-focus-box-shadow-size: 0 0 0 0;
-$card-header-shadow: 0 0 0 0;
+$card-header-shadow: none;
 
 @import '../node_modules/bulma/bulma.sass';
 @import '../node_modules/bulma-switch/dist/css/bulma-switch.sass';

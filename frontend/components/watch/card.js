@@ -4,9 +4,9 @@ import axios from 'axios'
 import { secondsToHumanTime } from '../../utils'
 
 const WatchCard = (props) => {
-  const [active, setActive] = useState(props.active)
-
   const { url, _id, interval, targets, updatedAt } = props
+
+  const [active, setActive] = useState(props.active)
 
   const onChangeStatus = async () => {
     try {
@@ -30,7 +30,7 @@ const WatchCard = (props) => {
             {url}
           </a>
         </p>
-        <div className='card-header-icon'>
+        <div className='card-header-icon is-flex'>
           <div>
             <input
               id={'switchActive' + _id}
@@ -43,12 +43,12 @@ const WatchCard = (props) => {
             <label htmlFor={'switchActive' + _id}> </label>
           </div>
         </div>
-        <div className='card-header-icon is-paddingless has-text-primary'>
+        <div className='card-header-icon is-paddingless has-text-primary is-flex'>
           <span className='icon is-large'>
             <ion-icon name='create' />
           </span>
         </div>
-        <div className='card-header-icon is-paddingless has-text-danger'>
+        <div className='card-header-icon is-paddingless has-text-danger is-flex'>
           <span className='icon is-large'>
             <ion-icon name='close' />
           </span>
@@ -101,10 +101,9 @@ const WatchCard = (props) => {
       <style jsx>{`
         .card {
           margin-bottom: 2rem;
+          border-radius: 0.5rem !important;
         }
         .card-header-icon {
-          display: flex;
-          flex-direction: column;
           justify-content: center;
           align-items: center;
         }
