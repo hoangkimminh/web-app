@@ -26,11 +26,11 @@ const WatchCard = (props) => {
     <div className='card'>
       <header className='card-header has-background-white-bis'>
         <p className='card-header-title'>
-          <a href={url} target='_blank'>
+          <a className='url' href={url} target='_blank'>
             {url}
           </a>
         </p>
-        <div className='card-header-icon is-flex'>
+        <div className='card-header-icon'>
           <div>
             <input
               id={'switchActive' + _id}
@@ -43,12 +43,12 @@ const WatchCard = (props) => {
             <label htmlFor={'switchActive' + _id}> </label>
           </div>
         </div>
-        <div className='card-header-icon is-paddingless has-text-primary is-flex'>
+        <div className='card-header-icon is-paddingless has-text-primary'>
           <span className='icon is-large'>
             <ion-icon name='create' />
           </span>
         </div>
-        <div className='card-header-icon is-paddingless has-text-danger is-flex'>
+        <div className='card-header-icon is-paddingless has-text-danger'>
           <span className='icon is-large'>
             <ion-icon name='close' />
           </span>
@@ -106,14 +106,6 @@ const WatchCard = (props) => {
         .card-header-icon {
           justify-content: center;
           align-items: center;
-        }
-        @media screen and (max-width: 738px) {
-          .card-header-title {
-            width: 100px;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
-          }
         }
       `}</style>
     </div>
