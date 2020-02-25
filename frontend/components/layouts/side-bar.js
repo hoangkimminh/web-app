@@ -131,6 +131,11 @@ const SideBar = () => {
       <UserInfo />
       <Menu />
       <Brand />
+      <style jsx>{`
+        section {
+          height: 100%;
+        }
+      `}</style>
     </section>
   )
 }
