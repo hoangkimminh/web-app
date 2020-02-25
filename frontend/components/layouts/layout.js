@@ -2,8 +2,12 @@ const Layout = (props) => {
   const { left, children } = props
   return (
     <article className='is-flex'>
-      {left && <aside className='is-hidden-mobile'>{left}</aside>}
-      <aside className='is-hidden-mobile placeholder'></aside>
+      {left && (
+        <>
+          <aside className='is-hidden-mobile'>{left}</aside>
+          <aside className='is-hidden-mobile placeholder'></aside>
+        </>
+      )}
       <div>{children}</div>
       <style jsx>{`
         aside {
