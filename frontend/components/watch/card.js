@@ -71,30 +71,30 @@ const WatchCard = (props) => {
             </div>
             <div className='column is-6 card-field'>
               <span className='has-text-weight-bold'>Last update: </span>
-              <span>{updatedAt}</span>
+              <span>NULL</span>
             </div>
           </div>
           <hr />
           <div className='card-field'>
-            <table className='table is-hoverable'>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                {Array.isArray(targets) &&
-                  targets.map((target, i) => {
-                    return (
-                      <tr key={i}>
-                        <td>{target.name}</td>
-                        <td>{target.data ? target.data : 'NULL'}</td>
-                      </tr>
-                    )
-                  })}
-              </tbody>
-            </table>
+            <div className='columns'>
+              <div className='column is-half'>
+                <div className='has-text-weight-bold'>Target name</div>
+              </div>
+              <div className='column is-half'>
+                <div className='has-text-weight-bold'>Current value</div>
+              </div>
+            </div>
+            {Array.isArray(targets) &&
+              targets.map((target, i) => {
+                return (
+                  <div className='columns target-row'>
+                    <div className='column is-half truncate'>{target.name}</div>
+                    <div className='column is-half truncate'>
+                      {target.data ? target.data : 'NULL'}
+                    </div>
+                  </div>
+                )
+              })}
           </div>
         </div>
       </div>
@@ -103,9 +103,20 @@ const WatchCard = (props) => {
           margin-bottom: 2rem;
           border-radius: 0.5rem !important;
         }
+        header {
+          border-radius: 0.5rem 0.5rem 0 0 !important;
+        }
         .card-header-icon {
           justify-content: center;
           align-items: center;
+        }
+        .truncate {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .target-row:hover {
+          background-color: hsl(0, 0%, 98%); //white-bis
         }
       `}</style>
     </div>

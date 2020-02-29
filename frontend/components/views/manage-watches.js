@@ -11,6 +11,7 @@ const ManageWatchesView = () => {
     const fetchData = async () => {
       const res = await axios.get('api/watch-manager/users/' + userStore.id)
       const watches = res.data
+      console.log(res.data)
       if (watches.length) setWatchList(watches)
     }
     fetchData()
@@ -28,6 +29,7 @@ const ManageWatchesView = () => {
           targets={watch.targets}
           createdAt={watch.createdAt}
           updatedAt={watch.updatedAt}
+          lastCheck={watch.lastCheck}
         />
       ))}
     </div>
