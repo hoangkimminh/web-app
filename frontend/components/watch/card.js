@@ -24,7 +24,7 @@ const WatchCard = (props) => {
 
   return (
     <div className='card'>
-      <header className='card-header has-background-white-bis'>
+      <header className='card-header has-background-light'>
         <p className='card-header-title'>
           <a className='url' href={url} target='_blank'>
             {url}
