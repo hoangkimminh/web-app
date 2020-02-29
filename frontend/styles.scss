@@ -3,9 +3,12 @@
 $box-radius: 0.5rem;
 $box-padding: 1rem;
 
+$card-header-shadow: none;
+
 $input-focus-border-color: $input-hover-border-color;
 $input-focus-box-shadow-size: 0 0 0 0;
-$card-header-shadow: none;
+
+$section-padding: 1.5rem 1.5rem;
 
 @import '../node_modules/bulma/bulma.sass';
 @import '../node_modules/bulma-switch/dist/css/bulma-switch.sass';

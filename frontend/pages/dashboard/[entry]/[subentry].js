@@ -29,11 +29,6 @@ const Dashboard = () => {
         <MessengerPopup />
         {main}
       </section>
-      <style jsx>{`
-        section {
-          padding: 3rem;
-        }
-      `}</style>
     </Layout>
   )
 }

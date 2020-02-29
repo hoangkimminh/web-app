@@ -4,6 +4,25 @@ import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 import { userStoreContext } from '../../stores/user'
 
+const Brand = () => {
+  return (
+    <div>
+      <figure className='image is-32x32'>
+        <Link href='/'>
+          <a>
+            <img src='/static/logo-night-watch.svg' />
+          </a>
+        </Link>
+      </figure>
+      <style jsx>{`
+        div {
+          margin-bottom: 2rem;
+        }
+      `}</style>
+    </div>
+  )
+}
+
 const UserInfo = observer(() => {
   const userStore = useContext(userStoreContext)
   useEffect(() => {
@@ -12,26 +31,25 @@ const UserInfo = observer(() => {
 
   return (
     <div className='is-flex'>
-      <figure className='image is-128x128'>
+      <figure className='image is-48x48'>
         <img className='is-rounded' src={userStore.avatar} />
       </figure>
-      <p className='is-flex'>
-        <h6 className='title is-6 is-marginless'>{userStore.name}</h6>
+      <p className='is-flex-inline'>
+        <h6 className='title is-6'>{userStore.name}</h6>
         <span className='tag is-rounded is-dark'>{userStore.privilege}</span>
       </p>
       <style jsx>{`
         div {
-          flex-direction: column;
-          align-items: center;
           margin-bottom: 2rem;
         }
-        figure {
-          margin-bottom: 1rem;
+        div > *:not(:last-child) {
+          margin-right: 1rem;
         }
         p {
-          align-self: stretch;
-          align-items: baseline;
-          justify-content: space-between;
+          flex-direction: column;
+        }
+        .title {
+          margin-bottom: 0.5rem;
         }
       `}</style>
     </div>
@@ -102,25 +120,6 @@ const Menu = () => {
           </Link>
         </li>
       </ul>
-      <style jsx>{`
-        div {
-          margin-bottom: 2rem;
-        }
-      `}</style>
-    </div>
-  )
-}
-
-const Brand = () => {
-  return (
-    <div>
-      <figure className='image is-48x48'>
-        <Link href='/'>
-          <a>
-            <img src='/static/logo-night-watch.svg' />
-          </a>
-        </Link>
-      </figure>
     </div>
   )
 }
@@ -128,9 +127,9 @@ const Brand = () => {
 const SideBar = () => {
   return (
     <section className='section has-background-light'>
+      <Brand />
       <UserInfo />
       <Menu />
-      <Brand />
       <style jsx>{`
         section {
           min-height: 100vh;
