@@ -2,7 +2,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import TruncateMarkup from 'react-truncate-markup'
 
-import { secondsToHumanTime, getLastTime } from '../../utils'
+import { secondsToHumanTime, mostRecent } from '../../utils'
 
 const WatchCard = (props) => {
   const { url, _id, interval, targets, checkedAt } = props
@@ -70,11 +70,17 @@ const WatchCard = (props) => {
           <div className='columns is-gapless'>
             <div className='column is-6 card-field'>
               <span className='has-text-weight-bold'>Last check: </span>
-              <span>{checkedAt}</span>
+              <span>{checkedAt ? new Date(checkedAt).toLocaleString() : 'NULL'}</span>
             </div>
             <div className='column is-6 card-field'>
               <span className='has-text-weight-bold'>Last update: </span>
-              <span>{getLastTime(targets.map((target) => target.updatedAt))}</span>
+              <span>
+                {mostRecent(
+                  targets
+                    .filter((target) => target.updatedAt)
+                    .map((target) => target.updatedAt)
+                )}
+              </span>
             </div>
           </div>
           <hr />
