@@ -25,3 +25,11 @@ export const secondsToHumanTime = (s) => {
 
   return `${days} ${hours} ${minutes} ${seconds}`
 }
+
+export const mostRecent = (timestamps) => {
+  const dates = timestamps.map((timestamp) => new Date(timestamp))
+  if (dates.length > 0) {
+    return new Date(Math.max(...dates)).toLocaleString()
+  }
+  return 'NULL'
+}

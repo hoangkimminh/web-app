@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import axios from 'axios'
+import TruncateMarkup from 'react-truncate-markup'
 
-import { secondsToHumanTime } from '../../utils'
+import { secondsToHumanTime, mostRecent } from '../../utils'
 
 const WatchCard = (props) => {
-  const { url, _id, interval, targets, updatedAt } = props
+  const { url, _id, interval, targets, checkedAt } = props
 
   const [active, setActive] = useState(props.active)
 
@@ -24,11 +25,13 @@ const WatchCard = (props) => {
 
   return (
     <div className='card'>
-      <header className='card-header has-background-white-bis'>
+      <header className='card-header has-background-light'>
         <p className='card-header-title'>
-          <a className='url' href={url} target='_blank'>
-            {url}
-          </a>
+          <TruncateMarkup lines={1}>
+            <a className='url' href={url} target='_blank'>
+              {url}
+            </a>
+          </TruncateMarkup>
         </p>
         <div className='card-header-icon'>
           <div>
@@ -67,34 +70,40 @@ const WatchCard = (props) => {
           <div className='columns is-gapless'>
             <div className='column is-6 card-field'>
               <span className='has-text-weight-bold'>Last check: </span>
-              <span>NULL</span>
+              <span>{checkedAt ? new Date(checkedAt).toLocaleString() : 'NULL'}</span>
             </div>
             <div className='column is-6 card-field'>
               <span className='has-text-weight-bold'>Last update: </span>
-              <span>{updatedAt}</span>
+              <span>
+                {mostRecent(
+                  targets
+                    .filter((target) => target.updatedAt)
+                    .map((target) => target.updatedAt)
+                )}
+              </span>
             </div>
           </div>
           <hr />
           <div className='card-field'>
-            <table className='table is-hoverable'>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                {Array.isArray(targets) &&
-                  targets.map((target, i) => {
-                    return (
-                      <tr key={i}>
-                        <td>{target.name}</td>
-                        <td>{target.data ? target.data : 'NULL'}</td>
-                      </tr>
-                    )
-                  })}
-              </tbody>
-            </table>
+            <div className='columns is-mobile'>
+              <div className='column is-half'>
+                <div className='has-text-weight-bold'>Target name</div>
+              </div>
+              <div className='column is-half'>
+                <div className='has-text-weight-bold'>Current value</div>
+              </div>
+            </div>
+            {Array.isArray(targets) &&
+              targets.map((target, i) => {
+                return (
+                  <div className='columns target-row is-mobile' key={i}>
+                    <div className='column is-half'>{target.name}</div>
+                    <div className='column is-half'>
+                      {target.data ? target.data : 'NULL'}
+                    </div>
+                  </div>
+                )
+              })}
           </div>
         </div>
       </div>
@@ -103,9 +112,20 @@ const WatchCard = (props) => {
           margin-bottom: 2rem;
           border-radius: 0.5rem !important;
         }
+        header {
+          border-radius: 0.5rem 0.5rem 0 0 !important;
+        }
         .card-header-icon {
           justify-content: center;
           align-items: center;
+        }
+        .target-row > div {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .target-row:hover {
+          background-color: hsl(0, 0%, 98%); // white-bis
         }
       `}</style>
     </div>
