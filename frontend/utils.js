@@ -25,3 +25,9 @@ export const secondsToHumanTime = (s) => {
 
   return `${days} ${hours} ${minutes} ${seconds}`
 }
+
+export const getLastTime = (listTime) => {
+  listTime.sort()
+  const lastUpdatedAt = listTime[listTime.length - 1]
+  return lastUpdatedAt ? lastUpdatedAt : 'NULL'
+}
