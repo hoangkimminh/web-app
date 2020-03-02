@@ -35,7 +35,7 @@ const UserInfo = observer(() => {
         <img className='is-rounded' src={userStore.avatar} />
       </figure>
       <p className='is-flex-inline'>
-        <h6 className='title is-6'>{userStore.name}</h6>
+        <span className='title is-6'>{userStore.name}</span>
         <span className='tag is-rounded is-dark'>{userStore.privilege}</span>
       </p>
       <style jsx>{`
@@ -68,7 +68,7 @@ const Menu = () => {
       <ul className='menu-list'>
         <li>
           <Link href='/dashboard/[entry]/[subentry]' as='/dashboard/watch/manage'>
-            <a className={subentry === 'manage' && 'is-active'}>
+            <a className={subentry === 'manage' ? 'is-active' : ''}>
               <span className='icon'>
                 <ion-icon name='eye' />
               </span>
@@ -78,7 +78,7 @@ const Menu = () => {
         </li>
         <li>
           <Link href='/dashboard/[entry]/[subentry]' as='/dashboard/watch/analytics'>
-            <a className={subentry === 'analytics' && 'is-active'}>
+            <a className={subentry === 'analytics' ? 'is-active' : ''}>
               <span className='icon'>
                 <ion-icon name='analytics' />
               </span>
@@ -91,7 +91,7 @@ const Menu = () => {
       <ul className='menu-list'>
         <li>
           <Link href='/dashboard/[entry]/[subentry]' as='/dashboard/account/profile'>
-            <a className={subentry === 'profile' && 'is-active'}>
+            <a className={subentry === 'profile' ? 'is-active' : ''}>
               <span className='icon'>
                 <ion-icon name='person' />
               </span>
@@ -101,7 +101,7 @@ const Menu = () => {
         </li>
         <li>
           <Link href='/dashboard/[entry]/[subentry]' as='/dashboard/account/settings'>
-            <a className={subentry === 'settings' && 'is-active'}>
+            <a className={subentry === 'settings' ? 'is-active' : ''}>
               <span className='icon'>
                 <ion-icon name='settings' />
               </span>

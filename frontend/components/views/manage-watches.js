@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { useContext, useEffect, useState } from 'react'
 import { userStoreContext } from '../../stores/user'
-
 import WatchCard from '../watch/card'
 
 const ManageWatchesView = () => {
@@ -9,7 +8,7 @@ const ManageWatchesView = () => {
   const userStore = useContext(userStoreContext)
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get('api/watch-manager/users/' + userStore.id)
+      const res = await axios.get('/api/watch-manager/users/' + userStore.id)
       const watches = res.data
       if (watches.length) setWatchList(watches)
     }
