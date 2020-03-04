@@ -9,7 +9,7 @@ const ManageWatchesView = () => {
   const userStore = useContext(userStoreContext)
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get('api/watch-manager/users/' + userStore.id)
+      const res = await axios.get('/api/watch-manager/users/' + userStore.id)
       const watches = res.data
       if (watches.length) setWatchList(watches)
     }
