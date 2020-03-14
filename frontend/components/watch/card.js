@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useContext } from 'react'
 import TruncateMarkup from 'react-truncate-markup'
 import { observer } from 'mobx-react-lite'
 
@@ -8,25 +8,10 @@ import { secondsToHumanTime, mostRecent } from '../../utils'
 const WatchCard = observer((props) => {
   const { url, _id, interval, targets, checkedAt, active } = props
 
-  // const [active, setActive] = useState(props.active)
-
-  const listWatchStore = useContext(watchListStoreContext)
+  const watchListStore = useContext(watchListStoreContext)
 
   const onChangeStatus = async () => {
-    // try {
-    //   const toggleActive = active ? 'inactive' : 'active'
-    //   const res = await axios.put(
-    //     '/api/watch-manager/' + props._id + '/status/' + toggleActive
-    //   )
-    //   if (res.status === 204) {
-    //     await setActive(!active)
-    //   }
-    // } catch (error) {
-    //   console.error(error)
-    // }
-    
-    listWatchStore.toggleStatus(_id)
-    // if (res.sta)
+    watchListStore.toggleStatus(_id)
   }
 
   return (
