@@ -1,24 +1,30 @@
 import axios from 'axios'
 import { useContext, useEffect, useState } from 'react'
+import { observer } from 'mobx-react-lite'
 import { userStoreContext } from '../../stores/user'
+import { listWatchStoreContext } from '../../stores/list-watch'
 
 import WatchCard from '../watch/card'
 
-const ManageWatchesView = () => {
+const ManageWatchesView = observer(() => {
   const [watchList, setWatchList] = useState([])
+
   const userStore = useContext(userStoreContext)
+  const listWatchStore = useContext(listWatchStoreContext)
+
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await axios.get('/api/watch-manager/users/' + userStore.id)
-      const watches = res.data
-      if (watches.length) setWatchList(watches)
-    }
-    fetchData()
+    // const fetchData = async () => {
+    //   const res = await axios.get('/api/watch-manager/users/' + userStore.id)
+    //   const watches = res.data
+    //   if (watches.length) setWatchList(watches)
+    // }
+    // fetchData()
+    listWatchStore.fetchWatches(userStore.id)
   }, [])
 
   return (
     <div>
-      {watchList.map((watch, i) => (
+      {listWatchStore.watches.map((watch, i) => (
         <WatchCard
           key={i}
           _id={watch._id}
@@ -31,6 +37,6 @@ const ManageWatchesView = () => {
       ))}
     </div>
   )
-}
+})
 
 export default ManageWatchesView
