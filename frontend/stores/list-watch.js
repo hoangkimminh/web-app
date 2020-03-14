@@ -1,12 +1,11 @@
-import { observable, action, runInAction } from 'mobx'
+import { observable, action } from 'mobx'
 import { createContext } from 'react'
 import axios from 'axios'
-
-import Watch from './watch'
 
 class ListWatchStore {
   @observable watches = []
 
+  @action
   async fetchWatches(userId) {
     try {
       const response = await axios.get('/api/watch-manager/users/' + userId)
@@ -18,20 +17,24 @@ class ListWatchStore {
     }
   }
 
-  set watches(watchesData) {
-    this.watches = watchesData.map((watch) => {
-      const { _id, url, interval, active, targets, checkedAt } = watch
-      return new Watch(_id, url, interval, active, targets, checkedAt)
-    })
+  getWatchById(_id) {
+    return this.watches.find(watch => watch._id === _id)
   }
 
   @action
   async changeWatchStatusById(_id) {
-    const watch = await this.watches.filter((watch) => watch._id === _id)[0]
-    console.log(watch)
-    runInAction(() => {
-      watch.changeWatchStatus()
-    })
+    try {
+      const watch = await this.getWatchById(_id)
+      const toggleActive = watch.active ? 'inactive' : 'active'
+      const res = await axios.put('/api/watch-manager/' + _id + '/status/' + toggleActive)
+      if (res.status === 204) {
+        watch.active = !watch.active
+        return true
+      }
+    } catch (error) {
+      console.error(error)
+      return false
+    }
   }
 }
 
