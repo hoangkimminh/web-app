@@ -2,7 +2,7 @@ import { useState, useContext } from 'react'
 import TruncateMarkup from 'react-truncate-markup'
 import { observer } from 'mobx-react-lite'
 
-import { listWatchStoreContext } from '../../stores/list-watch'
+import { watchListStoreContext } from '../../stores/watch-list'
 import { secondsToHumanTime, mostRecent } from '../../utils'
 
 const WatchCard = observer((props) => {
@@ -10,7 +10,7 @@ const WatchCard = observer((props) => {
 
   // const [active, setActive] = useState(props.active)
 
-  const listWatchStore = useContext(listWatchStoreContext)
+  const listWatchStore = useContext(watchListStoreContext)
 
   const onChangeStatus = async () => {
     // try {
@@ -25,7 +25,7 @@ const WatchCard = observer((props) => {
     //   console.error(error)
     // }
     
-    listWatchStore.changeWatchStatusById(_id)
+    listWatchStore.toggleStatus(_id)
     // if (res.sta)
   }
 

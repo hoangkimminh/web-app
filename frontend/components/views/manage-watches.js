@@ -1,21 +1,21 @@
 import { useContext, useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { userStoreContext } from '../../stores/user'
-import { listWatchStoreContext } from '../../stores/list-watch'
+import { watchListStoreContext } from '../../stores/watch-list'
 
 import WatchCard from '../watch/card'
 
 const ManageWatchesView = observer(() => {
   const userStore = useContext(userStoreContext)
-  const listWatchStore = useContext(listWatchStoreContext)
+  const watchListStore = useContext(watchListStoreContext)
 
   useEffect(() => {
-    listWatchStore.fetchWatches(userStore.id)
+    watchListStore.fetch(userStore.id)
   }, [])
 
   return (
     <div>
-      {listWatchStore.watches.map((watch, i) => (
+      {watchListStore.watches.map((watch, i) => (
         <WatchCard
           key={i}
           _id={watch._id}
