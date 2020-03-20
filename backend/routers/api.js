@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const proxyMiddleware = require('http-proxy-middleware')
+const { createProxyMiddleware } = require('http-proxy-middleware')
 const jwt = require('jsonwebtoken')
 const passport = require('passport')
 
@@ -35,7 +35,7 @@ router.get(
 const proxy = (path, target) => {
   router.use(
     path,
-    proxyMiddleware({
+    createProxyMiddleware({
       target,
       pathRewrite: { ['/api' + path]: '/' },
       changeOrigin: true

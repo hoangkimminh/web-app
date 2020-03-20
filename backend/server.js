@@ -1,9 +1,6 @@
 const express = require('express')
-const apiRouter = require('./api/router')
-const rootRouter = require('./router')
-const expressLoader = require('./loaders/express')
-const nextLoader = require('./loaders/next')
-const passportLoader = require('./loaders/passport')
+const { apiRouter, rootRouter } = require('./routers')
+const { expressLoader, nextLoader, passportLoader } = require('./loaders')
 
 const { PORT } = process.env
 
