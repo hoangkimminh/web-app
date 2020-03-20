@@ -32,10 +32,12 @@ const UserInfo = observer(() => {
   return (
     <div className='is-flex'>
       <figure className='image is-48x48'>
-        <img className='is-rounded' src={userStore.avatar} />
+        <img className='is-rounded' src={userStore.profile.avatar} />
       </figure>
       <p className='is-flex-inline'>
-        <span className='title is-6'>{userStore.name}</span>
+        <span className='title is-6'>
+          {userStore.profile.firstName + ' ' + userStore.profile.lastName}
+        </span>
         <span className='tag is-rounded is-dark'>{userStore.privilege}</span>
       </p>
       <style jsx>{`

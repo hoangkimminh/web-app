@@ -11,11 +11,12 @@ const General = observer((props) => {
     <section className='section'>
       <div className='columns avatar is-centered'>
         <figure className='image is-256x256'>
-          <img className='is-rounded' src={userStore.avatar} />
+          <img className='is-rounded' src={userStore.profile.avatar} />
         </figure>
       </div>
       <h6 className='title is-6 has-text-centered'>
-        {userStore.username ? userStore.username : userStore.name}&nbsp;&nbsp;&nbsp;
+        {userStore.profile.firstName + ' ' + userStore.profile.lastName}
+        &nbsp;&nbsp;&nbsp;
         <span className='tag is-rounded is-dark'>{userStore.privilege}</span>
       </h6>
       <div className='file has-name is-centered'>
@@ -36,7 +37,6 @@ const General = observer((props) => {
 })
 
 const PersonalInformation = observer((props) => {
-
   const userStore = props.userStore
 
   return (
@@ -44,10 +44,18 @@ const PersonalInformation = observer((props) => {
       <div className='columns is-centered'>
         <div className='column is-hafl-desktop is-three-quarters-tablet is-full-mobile'>
           <p className='title is-size-4'>Personal Information</p>
-          {/* Name field */}
+          {/* First name field */}
           <InputField
-            label='Name'
-            value={userStore.name}
+            label='First name'
+            value={userStore.profile.firstName}
+            type='text'
+            iconName='person'
+            readOnly={props.readOnly}
+          />
+          {/* Last name field */}
+          <InputField
+            label='Last name'
+            value={userStore.profile.lastName}
             type='text'
             iconName='person'
             readOnly={props.readOnly}
@@ -70,9 +78,16 @@ const PersonalInformation = observer((props) => {
                 <div className='control has-icons-left'>
                   <div className='select'>
                     <select>
-                      <option>Male</option>
-                      <option>Female</option>
-                      <option>Other</option>
+                      <option selected={userStore.profile.gender === 'male'}>male</option>
+                      <option selected={userStore.profile.gender === 'female'}>
+                        female
+                      </option>
+                      <option selected={userStore.profile.gender === 'other'}>
+                        other
+                      </option>
+                      <option selected={userStore.profile.gender === 'rather not say'}>
+                        rather not say
+                      </option>
                     </select>
                   </div>
                   <span className='icon is-left'>
@@ -93,7 +108,7 @@ const PersonalInformation = observer((props) => {
           {/* Birthday field */}
           <InputField
             label='Birthday'
-            value={userStore.birthday}
+            value={userStore.profile.birthday}
             type='date'
             iconName='calendar'
             readOnly={props.readOnly}

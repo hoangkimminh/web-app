@@ -9,9 +9,8 @@ class UserStore {
   @observable id = cookies.get('userID')
   @observable name = ''
   @observable username = ''
-  @observable avatar = ''
+  @observable profile = {firstName: '', lastName: '', avatar: '', gender: '', birthday: ''}
   @observable email = ''
-  @observable birthday = ''
   @observable linkedAccounts = { facebook: '', messenger: '', google: '' }
   @observable privilege = ''
   @observable createdAt = ''
@@ -24,9 +23,8 @@ class UserStore {
         const user = response.data
         this.name = user.name
         this.username = user.username
-        this.avatar = user.avatar
+        this.profile = user.profile
         this.email = user.email
-        this.birthday = user.birthday
         this.linkedAccounts = user.linkedAccounts
         this.privilege = user.privilege
         this.createdAt = user.createdAt
