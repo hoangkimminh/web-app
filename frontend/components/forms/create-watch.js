@@ -14,7 +14,6 @@ const CreateWatchForm = () => {
   const submit = useCallback(async () => {
     try {
       const res = await axios.get('/api/watch-manager/templates?url=' + url)
-      const templates = res.data
 
       if (res.data.length > 0) {
         const { targets } = res.data[0] // template's target
