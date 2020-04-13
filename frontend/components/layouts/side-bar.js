@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router'
-import { useEffect, useContext } from 'react'
-import { observer } from 'mobx-react-lite'
+import { useEffect } from 'react'
+import { observer } from 'mobx-react'
 import Link from 'next/link'
-import { userStoreContext } from '../../stores/user'
+import { useStores } from '../../hooks'
 
 const Brand = () => {
   return (
@@ -24,7 +24,7 @@ const Brand = () => {
 }
 
 const UserInfo = observer(() => {
-  const userStore = useContext(userStoreContext)
+  const { userStore } = useStores()
   useEffect(() => {
     userStore.fetchUser()
   })

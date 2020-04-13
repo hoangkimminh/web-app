@@ -1,32 +1,41 @@
 import axios from 'axios'
-import { useCallback, useContext, useReducer, useState } from 'react'
+import { useCallback, useReducer, useState, useEffect } from 'react'
 
 import InputField from '../common/input-field'
-import { userStoreContext } from '../../stores/user'
 import { secondsToHumanTime } from '../../utils'
+import { useStores } from '../../hooks'
 
 const CreateWatchForm = () => {
-  const userStore = useContext(userStoreContext)
+  const { userStore } = useStores()
   const [url, changeUrl] = useState('')
   const [interval, changeInterval] = useState() // in seconds
-  const [cssSelectors, dispatchCssSelectors] = useReducer(
-    (state, change) => {
-      const [i, newValue] = change
-      if (!newValue) state.splice(i, 1)
-      else state[i] = newValue
-      return [...state]
-    },
-    [{ cssSelector: '', type: 'string', name: '' }]
-  )
-  const submit = useCallback(() => {
-    const targets = cssSelectors
-    axios.post('/api/watch-manager', {
-      userID: userStore.id,
-      url,
-      interval,
-      targets
-    })
-  }, [url, interval, cssSelectors])
+  const [errorTemplate, setErrorTemplate] = useState('')
+
+  const submit = useCallback(async () => {
+    try {
+      const res = await axios.get('/api/watch-manager/templates?url=' + url)
+      const templates = res.data
+
+      if (res.data.length > 0) {
+        const { targets } = res.data[0] // template's target
+        setErrorTemplate('')
+        axios.post('/api/watch-manager', {
+          userID: userStore.id,
+          url,
+          interval,
+          targets,
+        })
+      } else {
+        setErrorTemplate('No available template')
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }, [url, interval])
+
+  const onChangeUrl = async (e) => {
+    changeUrl(e.target.value)
+  }
 
   return (
     <form onSubmit={(ev) => ev.preventDefault()}>
@@ -35,7 +44,7 @@ const CreateWatchForm = () => {
         iconName='link'
         type='url'
         placeholder='https://example.com'
-        onChange={(e) => changeUrl(e.target.value)}
+        onChange={onChangeUrl}
         value={url}
         required={true}
       />
@@ -50,7 +59,16 @@ const CreateWatchForm = () => {
         helpText={'aka:' + secondsToHumanTime(interval)}
         required={true}
       />
-      <CssSelectorsField value={cssSelectors} onChange={dispatchCssSelectors} />
+      <div className='field is-horizontal'>
+        <div class='field-label'></div>
+        {errorTemplate !== '' && (
+          <div className='field-body'>
+            <div className='has-text-danger'>
+              No template available. Try again, please!
+            </div>
+          </div>
+        )}
+      </div>
       <div className='field is-horizontal'>
         <div class='field-label'></div>
         <div className='field-body buttons'>
@@ -83,7 +101,7 @@ const CssSelectorsField = (props) => (
             onClick={() =>
               props.onChange([
                 props.value.length,
-                { cssSelector: '', type: 'string', name: '' }
+                { cssSelector: '', type: 'string', name: '' },
               ])
             }
           >
@@ -151,7 +169,7 @@ const CssSelectorRow = (props) => {
                   props.onChange({
                     cssSelector: cssSelector,
                     type: ev.target.value,
-                    name
+                    name,
                   })
                 }
               >
