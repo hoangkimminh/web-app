@@ -1,13 +1,11 @@
-import { useContext, useEffect } from 'react'
-import { observer } from 'mobx-react-lite'
-import { userStoreContext } from '../../stores/user'
-import { watchListStoreContext } from '../../stores/watch-list'
+import { useEffect } from 'react'
+import { observer } from 'mobx-react'
 
 import WatchCard from '../watch/card'
+import { useStores } from '../../hooks'
 
 const ManageWatchesView = observer(() => {
-  const userStore = useContext(userStoreContext)
-  const watchListStore = useContext(watchListStoreContext)
+  const { userStore, watchListStore } = useStores()
 
   useEffect(() => {
     watchListStore.fetch(userStore.id)

@@ -1,8 +1,8 @@
-import { observer } from 'mobx-react-lite'
-import { useState, useContext } from 'react'
+import { observer } from 'mobx-react'
+import { useState } from 'react'
 
-import { userStoreContext } from '../../stores/user'
 import InputField from '../common/input-field'
+import { useStores } from '../../hooks'
 
 const General = observer((props) => {
   const userStore = props.userStore
@@ -299,7 +299,7 @@ const SubmitFormField = (props) => {
 }
 
 const ProfileForm = () => {
-  const userStore = useContext(userStoreContext)
+  const { userStore } = useStores()
 
   const [readOnly, setReadOnly] = useState(true)
 

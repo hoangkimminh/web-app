@@ -1,5 +1,4 @@
 import { observable } from 'mobx'
-import { createContext } from 'react'
 import axios from 'axios'
 import { Cookies } from 'react-cookie'
 
@@ -21,6 +20,10 @@ class UserStore {
   @observable createdAt = ''
   @observable updatedAt = ''
 
+  constructor(rootStore) {
+    this.rootStore = rootStore
+  }
+
   async fetchUser() {
     try {
       const response = await axios.get('/api/user-manager/' + this.id)
@@ -38,4 +41,4 @@ class UserStore {
   }
 }
 
-export const userStoreContext = createContext(new UserStore())
+export default UserStore

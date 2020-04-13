@@ -1,9 +1,12 @@
 import { observable, action } from 'mobx'
-import { createContext } from 'react'
 import axios from 'axios'
 
 class WatchListStore {
   @observable watches = []
+
+  constructor(rootStore) {
+    this.rootStore = rootStore
+  }
 
   @action
   async fetch(userId) {
@@ -18,7 +21,7 @@ class WatchListStore {
   }
 
   get(_id) {
-    return this.watches.find(watch => watch._id === _id)
+    return this.watches.find((watch) => watch._id === _id)
   }
 
   @action
@@ -34,6 +37,8 @@ class WatchListStore {
       console.error(error)
     }
   }
+
+  
 }
 
-export const watchListStoreContext = createContext(new WatchListStore())
+export default WatchListStore
