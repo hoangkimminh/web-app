@@ -1,5 +1,5 @@
-import { observable } from 'mobx'
 import axios from 'axios'
+import { observable } from 'mobx'
 import { Cookies } from 'react-cookie'
 
 const cookies = new Cookies()
@@ -12,7 +12,7 @@ class UserStore {
     lastName: '',
     avatar: '',
     gender: '',
-    birthday: ''
+    birthday: '',
   }
   @observable email = ''
   @observable linkedAccounts = { facebook: '', messenger: '', google: '' }
@@ -20,21 +20,19 @@ class UserStore {
   @observable createdAt = ''
   @observable updatedAt = ''
 
+  axios = axios.create({
+    timeout: 10 * 1000,
+    validateStatus: null, // always resolve HTTP response promises
+  })
+
   constructor(rootStore) {
     this.rootStore = rootStore
   }
 
-  async fetchUser() {
+  async fetch() {
     try {
-      const response = await axios.get('/api/user-manager/' + this.id)
-      const user = response.data
-      this.username = user.username
-      this.profile = user.profile
-      this.email = user.email
-      this.linkedAccounts = user.linkedAccounts
-      this.privilege = user.privilege
-      this.createdAt = user.createdAt
-      this.updatedAt = user.updatedAt
+      const res = await this.axios.get('/api/user-manager/' + this.id)
+      if (res.status >= 200 && res.status < 300) Object.assign(this, res.data)
     } catch (error) {
       console.error(error)
     }

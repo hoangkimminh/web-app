@@ -1,9 +1,8 @@
 import axios from 'axios'
-import { useCallback, useReducer, useState, useEffect } from 'react'
-
-import InputField from '../common/input-field'
-import { secondsToHumanTime } from '../../utils'
+import { useCallback, useState } from 'react'
 import { useStores } from '../../hooks'
+import { secondsToHumanTime } from '../../utils'
+import InputField from '../common/input-field'
 
 const CreateWatchForm = () => {
   const { userStore } = useStores()
@@ -59,7 +58,7 @@ const CreateWatchForm = () => {
         required={true}
       />
       <div className='field is-horizontal'>
-        <div class='field-label'></div>
+        <div className='field-label'></div>
         {errorTemplate !== '' && (
           <div className='field-body'>
             <div className='has-text-danger'>
@@ -69,10 +68,10 @@ const CreateWatchForm = () => {
         )}
       </div>
       <div className='field is-horizontal'>
-        <div class='field-label'></div>
+        <div className='field-label'></div>
         <div className='field-body buttons'>
           <button className='button is-primary' onClick={submit}>
-            Submit
+            Create
           </button>
           <button className='button is-danger is-outlined'>Reset</button>
         </div>
@@ -92,7 +91,7 @@ const CssSelectorsField = (props) => (
       />
     ))}
     <div className='field is-horizontal'>
-      <div class='field-label'></div>
+      <div className='field-label'></div>
       <div className='field-body'>
         <div className='control'>
           <button

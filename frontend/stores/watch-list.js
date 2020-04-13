@@ -1,8 +1,13 @@
-import { observable, action } from 'mobx'
 import axios from 'axios'
+import { action, observable } from 'mobx'
 
 class WatchListStore {
   @observable watches = []
+
+  axios = axios.create({
+    timeout: 10 * 1000,
+    validateStatus: null, // always resolve HTTP response promises
+  })
 
   constructor(rootStore) {
     this.rootStore = rootStore
@@ -11,10 +16,8 @@ class WatchListStore {
   @action
   async fetch(userId) {
     try {
-      const response = await axios.get('/api/watch-manager/users/' + userId)
-      if (response.status === 200) {
-        this.watches = response.data
-      }
+      const res = await this.axios.get('/api/watch-manager/users/' + userId)
+      if (res.status >= 200 && res.status < 300) this.watches = res.data
     } catch (error) {
       console.error(error)
     }
@@ -27,18 +30,14 @@ class WatchListStore {
   @action
   async toggleStatus(_id) {
     try {
-      const watch = await this.get(_id)
+      const watch = this.get(_id)
       const newStatus = watch.active ? 'inactive' : 'active'
       const res = await axios.put('/api/watch-manager/' + _id + '/status/' + newStatus)
-      if (res.status === 204) {
-        watch.active = !watch.active
-      }
+      if (res.status >= 200 && res.status < 300) watch.active = !watch.active
     } catch (error) {
       console.error(error)
     }
   }
-
-  
 }
 
 export default WatchListStore

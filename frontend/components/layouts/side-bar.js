@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
 import { observer } from 'mobx-react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import { useStores } from '../../hooks'
 
 const Brand = () => {
@@ -26,7 +26,7 @@ const Brand = () => {
 const UserInfo = observer(() => {
   const { userStore } = useStores()
   useEffect(() => {
-    userStore.fetchUser()
+    userStore.fetch()
   })
 
   return (
@@ -34,7 +34,7 @@ const UserInfo = observer(() => {
       <figure className='image is-48x48'>
         <img className='is-rounded' src={userStore.profile.avatar} />
       </figure>
-      <p className='is-flex-inline'>
+      <p className='is-flex'>
         <span className='title is-6'>
           {userStore.profile.firstName + ' ' + userStore.profile.lastName}
         </span>
@@ -74,7 +74,17 @@ const Menu = () => {
               <span className='icon'>
                 <ion-icon name='eye' />
               </span>
-              <span>&nbsp;Manage watches</span>
+              <span>&nbsp;Manage</span>
+            </a>
+          </Link>
+        </li>
+        <li>
+          <Link href='/dashboard/[entry]/[subentry]' as='/dashboard/watch/create'>
+            <a className={subentry === 'create' ? 'is-active' : ''}>
+              <span className='icon'>
+                <ion-icon name='add' />
+              </span>
+              <span>&nbsp;Create</span>
             </a>
           </Link>
         </li>

@@ -1,8 +1,7 @@
-import { useEffect } from 'react'
 import { observer } from 'mobx-react'
-
-import WatchCard from '../watch/card'
+import { useEffect } from 'react'
 import { useStores } from '../../hooks'
+import WatchCard from '../watch-card'
 
 const ManageWatchesView = observer(() => {
   const { userStore, watchListStore } = useStores()
