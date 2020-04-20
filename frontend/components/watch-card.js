@@ -1,8 +1,8 @@
 import TruncateMarkup from 'react-truncate-markup'
 import { observer } from 'mobx-react'
 
-import { secondsToHumanTime, mostRecent } from '../../utils'
-import { useStores } from '../../hooks'
+import { secondsToHumanTime, mostRecent } from '../utils'
+import { useStores } from '../hooks'
 
 const WatchCard = observer((props) => {
   const { url, _id, interval, targets, checkedAt, active, templateName } = props

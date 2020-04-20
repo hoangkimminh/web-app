@@ -14,7 +14,6 @@
  * @reactProps {number} max - maximum number if type is number
  * @reactProps {number} step - step if type is number
  */
-
 const InputField = (props) => {
   const {
     id,

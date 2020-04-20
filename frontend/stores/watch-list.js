@@ -4,6 +4,11 @@ import axios from 'axios'
 class WatchListStore {
   @observable watches = []
 
+  axios = axios.create({
+    timeout: 10 * 1000,
+    validateStatus: null, // always resolve HTTP response promises
+  })
+
   constructor(rootStore) {
     this.rootStore = rootStore
   }
@@ -13,7 +18,7 @@ class WatchListStore {
     try {
       const response = await axios.get('/api/watch-manager/users/' + userId)
       console.log(response.data)
-      if (response.status === 200) {
+      if (response.status >= 200 && response.status < 300) {
         const templates = await this.getTemplates()
         const watchList = await response.data.map((watch) => {
           const template = templates.find((value) => value._id === watch.templateID)
@@ -47,12 +52,10 @@ class WatchListStore {
   @action
   async toggleStatus(_id) {
     try {
-      const watch = await this.get(_id)
+      const watch = this.get(_id)
       const newStatus = watch.active ? 'inactive' : 'active'
       const res = await axios.put('/api/watch-manager/' + _id + '/status/' + newStatus)
-      if (res.status === 200 || res.status === 204) {
-        watch.active = !watch.active
-      }
+      if (res.status >= 200 && res.status < 300) watch.active = !watch.active
     } catch (error) {
       console.error(error)
     }

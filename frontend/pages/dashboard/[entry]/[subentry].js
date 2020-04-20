@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import CreateWatchView from '../../../components/views/create-watch'
-import ManageWatchesView from '../../../components/views/manage-watches'
-import ProfileView from '../../../components/views/profile'
+import CreateWatchView from '../../../components/dashboard-views/create-watch'
+import ManageWatchesView from '../../../components/dashboard-views/manage-watches'
+import ProfileView from '../../../components/dashboard-views/profile'
 import ActionBar from '../../../components/layouts/action-bar'
 import Layout from '../../../components/layouts/layout'
 import SideBar from '../../../components/layouts/side-bar'
@@ -24,7 +24,7 @@ const Dashboard = () => {
       <Head>
         <title>Dashboard - Night Watch</title>
       </Head>
-      <section className='section'>
+      <section className='section is-medium'>
         <ActionBar />
         <MessengerPopup />
         {main}

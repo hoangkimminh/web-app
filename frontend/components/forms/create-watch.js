@@ -78,7 +78,7 @@ const CreateWatchForm = () => {
         <div className='field-label'></div>
         <div className='field-body buttons'>
           <button className='button is-primary' onClick={submit}>
-            Submit
+            Create
           </button>
           <button className='button is-danger is-outlined' onClick={resetForm}>
             Reset

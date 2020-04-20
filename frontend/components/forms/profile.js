@@ -1,6 +1,5 @@
 import { observer } from 'mobx-react'
 import { useState } from 'react'
-
 import InputField from '../common/input-field'
 import { useStores } from '../../hooks'
 

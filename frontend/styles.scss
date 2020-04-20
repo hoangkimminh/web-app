@@ -9,6 +9,8 @@ $input-focus-border-color: $input-hover-border-color;
 $input-focus-box-shadow-size: 0 0 0 0;
 
 $section-padding: 1.5rem 1.5rem;
+$section-padding-medium: 1.5rem 3rem;
+$section-padding-large: 1.5rem 6rem;
 
 @import '../node_modules/bulma/bulma.sass';
 @import '../node_modules/bulma-switch/dist/css/bulma-switch.sass';
