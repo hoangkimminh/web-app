@@ -22,6 +22,7 @@ const ManageWatchesView = observer(() => {
           active={watch.active}
           targets={watch.targets}
           checkedAt={watch.checkedAt}
+          templateName={watch.templateName}
         />
       ))}
     </div>

@@ -5,7 +5,7 @@ import { secondsToHumanTime, mostRecent } from '../../utils'
 import { useStores } from '../../hooks'
 
 const WatchCard = observer((props) => {
-  const { url, _id, interval, targets, checkedAt, active } = props
+  const { url, _id, interval, targets, checkedAt, active, templateName } = props
 
   const { watchListStore } = useStores()
 
@@ -49,28 +49,56 @@ const WatchCard = observer((props) => {
       </header>
       <div className='card-content'>
         <div className='content'>
-          <div className='card-field'>
-            <span className='has-text-weight-bold'>Interval: </span>
-            <span>{secondsToHumanTime(interval)}</span>
-          </div>
-          <div className='card-field'>
-            <span className='has-text-weight-bold'>Targets: </span>
-            <span>{targets.length}</span>
-          </div>
           <div className='columns is-gapless'>
-            <div className='column is-6 card-field'>
-              <span className='has-text-weight-bold'>Last check: </span>
-              <span>{checkedAt ? new Date(checkedAt).toLocaleString() : 'NULL'}</span>
+            <div className='column'>
+              <div className='card-field columns is-gapless'>
+                <div className='column is-4'>
+                  <p className='has-text-weight-bold'>Interval: </p>
+                </div>
+                <div className='column is-8'>
+                  <p>{secondsToHumanTime(interval)}</p>
+                </div>
+              </div>
+              <div className='card-field columns is-gapless'>
+                <div className='column is-4'>
+                  <p className='has-text-weight-bold'>Template: </p>
+                </div>
+                <div className='column is-8'>
+                  <p>{templateName}</p>
+                </div>
+              </div>
+              <div className='card-field columns is-gapless'>
+                <div className='column is-4'>
+                  <p className='has-text-weight-bold'>Targets: </p>
+                </div>
+                <div className='column is-8'>
+                  <p>{targets.length}</p>
+                </div>
+              </div>
             </div>
-            <div className='column is-6 card-field'>
-              <span className='has-text-weight-bold'>Last update: </span>
-              <span>
-                {mostRecent(
-                  targets
-                    .filter((target) => target.updatedAt)
-                    .map((target) => target.updatedAt)
-                )}
-              </span>
+            <div className='column'>
+              <div className='card-field columns is-gapless'>
+                <div className='column is-4'>
+                  <p className='has-text-weight-bold'>Last check: </p>
+                </div>
+                <div className='column is-8'>
+                  <p>{checkedAt ? new Date(checkedAt).toLocaleString() : '-'}</p>
+                </div>
+              </div>
+              <div className='card-field columns is-gapless'>
+                <div className='column is-4'>
+                  <p className='has-text-weight-bold'>Last update: </p>
+                </div>
+                <div className='column is-8'>
+                  <p>
+                    {mostRecent(
+                      targets
+                        .filter((target) => target.updatedAt)
+                        .map((target) => target.updatedAt)
+                    )}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
           <hr />
@@ -89,7 +117,7 @@ const WatchCard = observer((props) => {
                   <div className='columns target-row is-mobile' key={i}>
                     <div className='column is-half'>{target.name}</div>
                     <div className='column is-half'>
-                      {target.data ? target.data : 'NULL'}
+                      {target.data ? target.data : '-'}
                     </div>
                   </div>
                 )

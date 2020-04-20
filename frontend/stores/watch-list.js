@@ -12,8 +12,28 @@ class WatchListStore {
   async fetch(userId) {
     try {
       const response = await axios.get('/api/watch-manager/users/' + userId)
+      console.log(response.data)
       if (response.status === 200) {
-        this.watches = response.data
+        const templates = await this.getTemplates()
+        const watchList = await response.data.map((watch) => {
+          const template = templates.find((value) => value._id === watch.templateID)
+          return { ...watch, templateName: template ? template.name : null }
+        })
+        this.watches = watchList
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  async getTemplates() {
+    try {
+      const response = await axios.get('/api/watch-manager/templates')
+      console.log(response.data)
+      if (response.data) {
+        return response.data
+      } else {
+        return null
       }
     } catch (error) {
       console.error(error)
@@ -30,15 +50,13 @@ class WatchListStore {
       const watch = await this.get(_id)
       const newStatus = watch.active ? 'inactive' : 'active'
       const res = await axios.put('/api/watch-manager/' + _id + '/status/' + newStatus)
-      if (res.status === 204) {
+      if (res.status === 200 || res.status === 204) {
         watch.active = !watch.active
       }
     } catch (error) {
       console.error(error)
     }
   }
-
-  
 }
 
 export default WatchListStore

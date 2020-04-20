@@ -1,4 +1,5 @@
 /**
+ * @reactProps {string} id - Id of the field
  * @reactProps {string} label - Name of the field
  * @reactProps {string} iconName - Set icon by name
  * @reactProps {string} iconSource - Set icon by URL
@@ -16,6 +17,7 @@
 
 const InputField = (props) => {
   const {
+    id,
     label,
     iconName,
     iconSource,
@@ -28,7 +30,7 @@ const InputField = (props) => {
     required,
     min,
     max,
-    step
+    step,
   } = props
 
   return (
@@ -40,6 +42,7 @@ const InputField = (props) => {
         <div className='field'>
           <div className={iconName || iconSource ? 'control has-icons-left' : 'control'}>
             <input
+              id={id}
               className='input'
               type={type}
               placeholder={placeholder}
