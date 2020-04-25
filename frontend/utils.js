@@ -18,12 +18,12 @@ export const secondsToHumanTime = (s) => {
     s = s % SECONDS_PER_MINUTE
   }
 
-  const days = d ? `${d} day${d > 1 ? 's' : ''}` : ''
-  const hours = h ? `${h} hour${h > 1 ? 's' : ''}` : ''
-  const minutes = m ? `${m} minute${m > 1 ? 's' : ''}` : ''
-  const seconds = s ? `${s} second${s > 1 ? 's' : ''}` : ''
+  const days = d ? `${d} day${d > 1 ? 's ' : ' '}` : ''
+  const hours = h ? `${h} hour${h > 1 ? 's ' : ' '}` : ''
+  const minutes = m ? `${m} minute${m > 1 ? 's ' : ' '}` : ''
+  const seconds = s ? `${s} second${s > 1 ? 's ' : ' '}` : ''
 
-  return `${days} ${hours} ${minutes} ${seconds}`
+  return `${days}${hours}${minutes}${seconds}`
 }
 
 export const mostRecent = (timestamps) => {

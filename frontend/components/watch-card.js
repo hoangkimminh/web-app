@@ -56,7 +56,8 @@ const WatchCard = observer((props) => {
                   <p className='has-text-weight-bold'>Interval: </p>
                 </div>
                 <div className='column is-8'>
-                  <p>{secondsToHumanTime(interval)}</p>
+                  <span className='double-dots'>:</span>
+                  <label>{secondsToHumanTime(interval)}</label>
                 </div>
               </div>
               <div className='card-field columns is-gapless'>
@@ -64,7 +65,8 @@ const WatchCard = observer((props) => {
                   <p className='has-text-weight-bold'>Template: </p>
                 </div>
                 <div className='column is-8'>
-                  <p>{templateName}</p>
+                  <span className='double-dots'>:</span>
+                  <label>{templateName}</label>
                 </div>
               </div>
               <div className='card-field columns is-gapless'>
@@ -72,7 +74,8 @@ const WatchCard = observer((props) => {
                   <p className='has-text-weight-bold'>Targets: </p>
                 </div>
                 <div className='column is-8'>
-                  <p>{targets.length}</p>
+                  <span className='double-dots'>:</span>
+                  <label>{targets.length}</label>
                 </div>
               </div>
             </div>
@@ -82,7 +85,8 @@ const WatchCard = observer((props) => {
                   <p className='has-text-weight-bold'>Last check: </p>
                 </div>
                 <div className='column is-8'>
-                  <p>{checkedAt ? new Date(checkedAt).toLocaleString() : '-'}</p>
+                  <span className='double-dots'>:</span>
+                  <label>{checkedAt ? new Date(checkedAt).toLocaleString() : '-'}</label>
                 </div>
               </div>
               <div className='card-field columns is-gapless'>
@@ -90,13 +94,14 @@ const WatchCard = observer((props) => {
                   <p className='has-text-weight-bold'>Last update: </p>
                 </div>
                 <div className='column is-8'>
-                  <p>
+                  <span className='double-dots'>:</span>
+                  <label>
                     {mostRecent(
                       targets
                         .filter((target) => target.updatedAt)
                         .map((target) => target.updatedAt)
                     )}
-                  </p>
+                  </label>
                 </div>
               </div>
             </div>
@@ -144,6 +149,9 @@ const WatchCard = observer((props) => {
         }
         .target-row:hover {
           background-color: hsl(0, 0%, 98%); // white-bis
+        }
+        .double-dots {
+          margin-right: 0.75rem;
         }
       `}</style>
     </div>
