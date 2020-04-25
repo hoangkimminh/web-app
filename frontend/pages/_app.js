@@ -4,7 +4,7 @@ import 'mobx-react-lite/batchingForReactDom'
 import '../styles.scss'
 
 const MyApp = ({ Component, pageProps }) => (
-  <ToastProvider autoDismiss autoDismissTimeout={3000} placement='bottom-right'>
+  <ToastProvider autoDismiss autoDismissTimeout={3000} placement='bottom-left'>
     <Component {...pageProps} />
   </ToastProvider>
 )

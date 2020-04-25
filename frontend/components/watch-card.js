@@ -56,7 +56,7 @@ const WatchCard = observer((props) => {
                   <p className='has-text-weight-bold'>Interval: </p>
                 </div>
                 <div className='column is-8'>
-                  <span className='double-dots'>:</span>
+                  <span className='colon'>:</span>
                   <label>{secondsToHumanTime(interval)}</label>
                 </div>
               </div>
@@ -65,7 +65,7 @@ const WatchCard = observer((props) => {
                   <p className='has-text-weight-bold'>Template: </p>
                 </div>
                 <div className='column is-8'>
-                  <span className='double-dots'>:</span>
+                  <span className='colon'>:</span>
                   <label>{templateName}</label>
                 </div>
               </div>
@@ -74,7 +74,7 @@ const WatchCard = observer((props) => {
                   <p className='has-text-weight-bold'>Targets: </p>
                 </div>
                 <div className='column is-8'>
-                  <span className='double-dots'>:</span>
+                  <span className='colon'>:</span>
                   <label>{targets.length}</label>
                 </div>
               </div>
@@ -85,7 +85,7 @@ const WatchCard = observer((props) => {
                   <p className='has-text-weight-bold'>Last check: </p>
                 </div>
                 <div className='column is-8'>
-                  <span className='double-dots'>:</span>
+                  <span className='colon'>:</span>
                   <label>{checkedAt ? new Date(checkedAt).toLocaleString() : '-'}</label>
                 </div>
               </div>
@@ -94,7 +94,7 @@ const WatchCard = observer((props) => {
                   <p className='has-text-weight-bold'>Last update: </p>
                 </div>
                 <div className='column is-8'>
-                  <span className='double-dots'>:</span>
+                  <span className='colon'>:</span>
                   <label>
                     {mostRecent(
                       targets
@@ -150,8 +150,8 @@ const WatchCard = observer((props) => {
         .target-row:hover {
           background-color: hsl(0, 0%, 98%); // white-bis
         }
-        .double-dots {
-          margin-right: 0.75rem;
+        .colon {
+          margin-right: 1rem;
         }
       `}</style>
     </div>

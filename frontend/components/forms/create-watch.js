@@ -35,7 +35,7 @@ const CreateWatchForm = () => {
           addToast('Error!', { appearance: 'error' })
         }
       } else {
-        addToast('No available template', { appearance: 'error' })
+        addToast('No template available', { appearance: 'error' })
       }
     } catch (error) {
       console.error(error)
