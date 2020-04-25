@@ -17,7 +17,6 @@ class WatchListStore {
   async fetch(userId) {
     try {
       const response = await axios.get('/api/watch-manager/users/' + userId)
-      console.log(response.data)
       if (response.status >= 200 && response.status < 300) {
         const templates = await this.getTemplates()
         const watchList = await response.data.map((watch) => {
@@ -34,7 +33,6 @@ class WatchListStore {
   async getTemplates() {
     try {
       const response = await axios.get('/api/watch-manager/templates')
-      console.log(response.data)
       if (response.data) {
         return response.data
       } else {
