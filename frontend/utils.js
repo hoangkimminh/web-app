@@ -31,5 +31,5 @@ export const mostRecent = (timestamps) => {
   if (dates.length > 0) {
     return new Date(Math.max(...dates)).toLocaleString()
   }
-  return '-'
+  return null
 }

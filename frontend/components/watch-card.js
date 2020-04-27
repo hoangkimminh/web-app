@@ -13,6 +13,10 @@ const WatchCard = observer((props) => {
     watchListStore.toggleStatus(_id)
   }
 
+  const mostRecentValue = mostRecent(
+    targets.filter((target) => target.updatedAt).map((target) => target.updatedAt)
+  )
+
   return (
     <div className='card'>
       <header className='card-header has-background-light'>
@@ -95,13 +99,7 @@ const WatchCard = observer((props) => {
                 </div>
                 <div className='column is-8'>
                   <span className='colon'>:</span>
-                  <label>
-                    {mostRecent(
-                      targets
-                        .filter((target) => target.updatedAt)
-                        .map((target) => target.updatedAt)
-                    )}
-                  </label>
+                  <label>{mostRecentValue !== null ? mostRecentValue : '-'}</label>
                 </div>
               </div>
             </div>
